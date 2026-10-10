@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding disease clusters with SaTScan | The V Lab</title>
+<meta name="description" content="A practical guide to SaTScan: how the spatial scan statistic works, choosing a probability model and analysis type, preparing input files, running it from the interface or from R with rsatscan, and reading the results responsibly.">
+<link rel="canonical" href="https://vthelab.com/satscan.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Finding disease clusters with SaTScan | The V Lab">
+<meta property="og:description" content="How the scan statistic works, choosing a model, preparing input files, running SaTScan from its interface or R, and reading results responsibly.">
+<meta property="og:url" content="https://vthelab.com/satscan.html">
+<meta property="og:image" content="https://vthelab.com/assets/og.png">
+<meta property="og:site_name" content="The V Lab">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The V Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Finding disease clusters with SaTScan | The V Lab">
+<meta name="twitter:description" content="How the scan statistic works, choosing a model, preparing input files, running SaTScan from its interface or R, and reading results responsibly.">
+<meta name="twitter:image" content="https://vthelab.com/assets/og.png">
+<meta name="theme-color" content="#13293d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="vlab-brand" href="index.html" aria-label="The V Lab home">
+      <span class="vlab-mark" aria-hidden="true">V</span>
+      <span class="vlab-name">The V Lab</span>
+    </a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="learn.html" aria-current="page">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="hero compact">
+  <div class="wrap">
+    <h1>Finding disease clusters with SaTScan</h1>
+    <p class="lede">SaTScan is free software for the spatial, temporal and space-time scan statistics. Public health teams use it to test whether cases are unusually concentrated in an area or a period, to evaluate reported cluster alarms, and to run ongoing outbreak surveillance. This guide covers how it works, which model to pick, and how to run it from its interface or from R.</p>
+    <nav class="toc" aria-label="On this page"><a href="#how">How it works</a><a href="#model">Choosing a model</a><a href="#analysis">Analysis types</a><a href="#workflow">Running an analysis</a><a href="#r">From R</a><a href="#reading">Reading results</a><a href="#more">Learn more</a></nav>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap two-col">
+    <div class="prose">
+      <h2>How the scan statistic works</h2>
+      <p>Imagine a circle centred on one location on the map. SaTScan grows it step by step, from zero up to a maximum size, and repeats this for every centre. Each circle is a candidate cluster. For each one it compares the cases observed inside with the number expected if risk were the same everywhere.</p>
+      <p>The candidate with the highest likelihood ratio is the <b>most likely cluster</b>. Under the Poisson model, for a window with <span class="tex" data-mode="inline" data-tex="c">c</span> observed cases, <span class="tex" data-mode="inline" data-tex="E[c]">E[c]</span> expected cases and <span class="tex" data-mode="inline" data-tex="C">C</span> cases in total:</p>
+      <div class="formula"><div class="tex" data-mode="display" data-tex="\text{LLR} = c \log\frac{c}{E[c]} + (C - c)\log\frac{C - c}{C - E[c]} \quad \text{when } c &gt; E[c]">LLR = c log(c / E[c]) + (C − c) log((C − c) / (C − E[c])) when c &gt; E[c]</div></div>
+      <p>Because thousands of windows are tested, an ordinary p-value would be far too optimistic. SaTScan instead simulates many random datasets under the null hypothesis, runs the same search on each, and asks how often a random dataset produces a cluster as strong as the real one. That Monte Carlo p-value already accounts for the many windows searched.</p>
+    </div>
+    <figure class="scan-fig">
+      <svg viewBox="0 0 320 260" role="img" aria-labelledby="scan-title scan-desc">
+        <title id="scan-title">Scan windows over a map of locations</title>
+        <desc id="scan-desc">Dots mark locations. Three nested circles grow around one location; the middle circle, shaded, contains several high-rate locations and is the most likely cluster.</desc>
+        <g class="pts">
+          <circle cx="40" cy="40" r="4"/><circle cx="95" cy="30" r="4"/><circle cx="150" cy="45" r="4"/><circle cx="210" cy="28" r="4"/><circle cx="275" cy="50" r="4"/>
+          <circle cx="30" cy="110" r="4"/><circle cx="80" cy="95" r="4"/><circle cx="250" cy="105" r="4"/><circle cx="295" cy="140" r="4"/>
+          <circle cx="45" cy="185" r="4"/><circle cx="100" cy="215" r="4"/><circle cx="160" cy="230" r="4"/><circle cx="230" cy="205" r="4"/><circle cx="285" cy="225" r="4"/>
+        </g>
+        <circle class="win w3" cx="160" cy="130" r="105"/>
+        <circle class="win w2 hit" cx="160" cy="130" r="60"/>
+        <circle class="win w1" cx="160" cy="130" r="26"/>
+        <g class="pts hot">
+          <circle cx="160" cy="130" r="5.5"/><circle cx="130" cy="110" r="5.5"/><circle cx="195" cy="120" r="5.5"/><circle cx="175" cy="165" r="5.5"/><circle cx="135" cy="155" r="5.5"/>
+        </g>
+        <g class="pts"><circle cx="110" cy="70" r="4"/><circle cx="205" cy="80" r="4"/><circle cx="215" cy="160" r="4"/><circle cx="95" cy="150" r="4"/></g>
+      </svg>
+      <figcaption>Windows grow around each location. The shaded circle holds more cases than expected and has the highest likelihood ratio.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="model">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Choosing a probability model</h2><p>The model follows from the data you have, not from the question alone.</p></div></div>
+    <div class="table-scroll">
+      <table class="fn-table q-table">
+        <thead><tr><th scope="col">If your data are…</th><th scope="col">Use</th><th scope="col">Health data example</th></tr></thead>
+        <tbody>
+          <tr><td>Case counts with a known population at risk</td><td><b>Poisson</b></td><td>Asthma ED visits per local geographic area, with population from the census</td></tr>
+          <tr><td>Cases and controls, coded 0/1</td><td><b>Bernoulli</b></td><td>Admitted versus not admitted ED visits, or birth defects against unaffected births</td></tr>
+          <tr><td>Cases only, with dates, and no reliable population</td><td><b>Space-time permutation</b></td><td>Daily syndromic counts for outbreak surveillance</td></tr>
+          <tr><td>Ordered categories</td><td><b>Ordinal</b></td><td>Cancer stage at diagnosis, or triage level</td></tr>
+          <tr><td>Unordered categories</td><td><b>Multinomial</b></td><td>Population age structure, or type of injury</td></tr>
+          <tr><td>Survival times, with or without censoring</td><td><b>Exponential</b></td><td>Time to death after diagnosis, or length of stay</td></tr>
+          <tr><td>Other continuous measurements</td><td><b>Normal</b></td><td>Average birth weight or a lab value by area</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="p-note">Poisson and Bernoulli analyses can adjust for categorical covariates such as age group and sex. SaTScan can also adjust for temporal trends, known clusters and missing data, and can scan several datasets together.</p>
+  </div>
+</section>
+
+<section id="analysis">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Analysis types</h2></div></div>
+    <ul class="pitfalls">
+      <li><h3>Purely spatial</h3><p>Where are cases concentrated, ignoring time? The usual first look at incidence or prevalence over a fixed period.</p></li>
+      <li><h3>Purely temporal</h3><p>When did cases rise, ignoring place? Windows slide along the time axis instead of across the map.</p></li>
+      <li><h3>Retrospective space-time</h3><p>Cylinders instead of circles: the base is an area and the height a time window. Answers "was there a cluster somewhere, at some time, in this historical period?"</p></li>
+      <li><h3>Prospective space-time</h3><p>For repeated surveillance. Only clusters still active at the end of the data count, and the significance can be adjusted for the analyses already run in earlier weeks.</p></li>
+      <li><h3>Spatial variation in temporal trends</h3><p>Finds areas where the trend over time differs from the rest, such as a place where rates are falling more slowly.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="workflow">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Running an analysis</h2><p>A purely spatial Poisson analysis of ED asthma visits by Alberta <a href="geography.html">local geographic area</a> makes a good first project.</p></div></div>
+    <ol class="steps">
+      <li>
+        <h3>Install SaTScan</h3>
+        <p>Download it from <a href="https://www.satscan.org/download.html">satscan.org</a>. The software is free, but you register first and receive a download password by email. The standard Windows installer includes the graphical interface, a bundled Java runtime, the command-line program, the user guide and sample data. There are separate downloads for macOS and Linux.</p>
+      </li>
+      <li>
+        <h3>Prepare the input files</h3>
+        <p>Plain-text files with one record per line. Location IDs must match exactly across files.</p>
+        <div class="grid grid-3 files">
+          <div class="code-wrap"><p class="code-cap">Case file (.cas): location, cases, date</p><pre><code>LGA_101  42  2025
+LGA_102  17  2025
+LGA_103  88  2025</code></pre></div>
+          <div class="code-wrap"><p class="code-cap">Population file (.pop): location, year, population</p><pre><code>LGA_101  2025  31250
+LGA_102  2025  9870
+LGA_103  2025  56400</code></pre></div>
+          <div class="code-wrap"><p class="code-cap">Coordinates file (.geo): location, latitude, longitude</p><pre><code>LGA_101  53.54  -113.49
+LGA_102  52.27  -113.81
+LGA_103  51.05  -114.07</code></pre></div>
+        </div>
+        <p class="p-note">Bernoulli analyses add a control file (.ctl). A grid file (.grd) lets circles centre somewhere other than the data locations. Covariates go in extra columns of the case and population files. For areas, coordinates are usually population-weighted centroids. The values above are illustrative.</p>
+      </li>
+      <li>
+        <h3>Set up the analysis</h3>
+        <p>The interface has three tabs. On <b>Input</b>, point to the files, choose the coordinate system and set the study period. On <b>Analysis</b>, choose the analysis type, the probability model and whether to scan for high rates, low rates or both. On <b>Output</b>, name the results file and choose extra outputs such as maps.</p>
+      </li>
+      <li>
+        <h3>Check the advanced settings</h3>
+        <p>Two matter most. The <b>maximum spatial cluster size</b> defaults to 50% of the population at risk; a smaller cap, such as 10–25%, stops one huge circle from swallowing half the province. The number of <b>Monte Carlo replications</b> defaults to 999; use more when you need a precise small p-value.</p>
+      </li>
+      <li>
+        <h3>Run and read the report</h3>
+        <p>The main results file lists the most likely cluster and any secondary clusters: the locations included, centre and radius, observed and expected cases, observed/expected ratio, relative risk, log likelihood ratio and p-value. Companion files give the same information per cluster and per location for joining back to your data.</p>
+      </li>
+      <li>
+        <h3>Map the clusters</h3>
+        <p>SaTScan can write KML for Google Earth and shapefiles for GIS software such as ArcGIS or QGIS, so clusters can be drawn over the original areas.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="r">
+  <div class="wrap two-col">
+    <div class="prose">
+      <h2>Running it from R</h2>
+      <p>The <a href="https://satscan.org/rsatscan/rsatscan.html">rsatscan</a> package on CRAN does not reimplement the method. It writes R data frames into SaTScan's file formats, writes the parameter file, calls your installed copy of SaTScan, and reads the results back into R. That makes analyses scriptable and reproducible in R Markdown or Quarto.</p>
+      <p>Parameters are numeric codes from SaTScan's parameter file, as in the comments in the example. Check them against your version: set the analysis up once in the interface, save the parameter file, and read the codes and their explanations in a text editor.</p>
+      <p>If you only need a quick purely spatial Poisson or Bernoulli scan inside R, the <code>kulldorff()</code> function in the SpatialEpi package is a lighter alternative.</p>
+    </div>
+    <div class="code-wrap">
+      <p class="code-cap">Purely spatial Poisson scan with rsatscan</p>
+<pre><code>library(rsatscan)
+td &lt;- tempdir()
+
+# cas: data frame of LGA, cases, year
+# pop: data frame of LGA, year, population
+# geo: data frame of LGA, latitude, longitude
+write.cas(cas, td, "asthma")
+write.pop(pop, td, "asthma")
+write.geo(geo, td, "asthma")
+
+invisible(ss.options(reset = TRUE))
+ss.options(list(
+  CaseFile        = "asthma.cas",
+  PopulationFile  = "asthma.pop",
+  CoordinatesFile = "asthma.geo",
+  CoordinatesType = 1,  # latitude/longitude
+  StartDate       = "2025/1/1",
+  EndDate         = "2025/12/31",
+  AnalysisType    = 1,  # purely spatial
+  ModelType       = 0,  # discrete Poisson
+  ScanAreas       = 1   # high rates
+))
+write.ss.prm(td, "asthma")
+
+res &lt;- satscan(td, "asthma", sslocation = "path/to/SaTScan")
+summary(res)
+res$col   # one row per cluster</code></pre>
+      <button class="copy" type="button" data-copy="">Copy</button>
+    </div>
+  </div>
+</section>
+
+<section id="reading">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Reading the results responsibly</h2></div></div>
+    <ul class="pitfalls">
+      <li><h3>A cluster is not a cause</h3><p>A significant cluster says cases are more concentrated than chance would suggest under the model. It does not say why. Differences in testing, coding, access to care or population counts can all produce one.</p></li>
+      <li><h3>The expected count is only as good as the denominator</h3><p>Poisson results depend on the population file. Out-of-date or misallocated populations create spurious clusters, so use the boundary vintage that matches your case data.</p></li>
+      <li><h3>Circles are an approximation</h3><p>A long, thin cluster along a river or highway will be split or padded by circular windows. Elliptic windows or a non-Euclidean neighbours file can help.</p></li>
+      <li><h3>Aggregation changes the answer</h3><p>The same cases grouped by LGA, by health status area or by postal code can give different clusters. Report the level you used and, where you can, check whether the finding holds at another.</p></li>
+      <li><h3>Adjust before you scan</h3><p>Without age and sex adjustment, an older or younger area can look like a cluster purely because of its population structure.</p></li>
+      <li><h3>Secondary clusters need care</h3><p>Their p-values are conservative and can overlap the most likely cluster. Decide in advance how you will report them.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap prose">
+    <h2>Learn more</h2>
+    <ul class="link-list">
+      <li><a href="https://www.satscan.org/">SaTScan home</a>: software, version history and the user guide (v10.3.3, September 2025)</li>
+      <li><a href="https://www.satscan.org/tutorials.html">Written tutorials</a>: Poisson cancer incidence, Bernoulli birth defects, advanced options, ordinal cancer stage, multinomial age structure, and prospective outbreak surveillance</li>
+      <li><a href="https://www.satscan.org/videotutorials.html">Video tutorials</a> and <a href="https://www.satscan.org/datasets.html">sample data sets</a></li>
+      <li><a href="https://satscan.org/rsatscan/rsatscan.html">rsatscan vignette</a>, with worked examples including results</li>
+      <li><a href="https://github.com/scanstatistics/satscan">Source code on GitHub</a></li>
+    </ul>
+    <p class="note">The method paper to cite is Kulldorff M. A spatial scan statistic. <em>Communications in Statistics: Theory and Methods</em> 1997;26:1481–1496. Cite the software version you used as well. SaTScan is a trademark of Martin Kulldorff; this page is an independent guide.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="vlab-brand" href="index.html" aria-label="The V Lab home"><span class="vlab-mark" aria-hidden="true">V</span><span class="vlab-name">The V Lab</span></a>
+      <p style="margin:12px 0 0;max-width:46ch">A health data science notebook: projects on synthetic Alberta health data, open guides and R tooling. Educational use only; no patient-level data.</p>
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="learn.html" aria-current="page">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="https://github.com/LaboratoireV">GitHub</a></nav>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script>
+(function () {
+  if (typeof window.katex !== "undefined") {
+    document.querySelectorAll(".tex").forEach(function (el) {
+      try { katex.render(el.getAttribute("data-tex"), el, { displayMode: el.dataset.mode === "display", throwOnError: false }); el.classList.add("rendered"); } catch (e) {}
+    });
+  }
+  document.querySelectorAll("button.copy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var text = b.getAttribute("data-copy") || b.parentNode.querySelector("pre").innerText;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1600); }, function () { b.textContent = "Select and copy"; });
+      } else { b.textContent = "Select and copy"; }
+    });
+  });
+})();
+</script>
+</body>
+</html>

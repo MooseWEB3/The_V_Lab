@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing math in Markdown and LaTeX | The V Lab</title>
+<meta name="description" content="How to write mathematical formulas in Markdown, R Markdown, Quarto, Jupyter, GitHub and LaTeX, with worked statistics examples and a live preview.">
+<link rel="canonical" href="https://vthelab.com/math.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writing math in Markdown and LaTeX | The V Lab">
+<meta property="og:description" content="How to write mathematical formulas in Markdown, R Markdown, Quarto, Jupyter, GitHub and LaTeX, with worked statistics examples and a live preview.">
+<meta property="og:url" content="https://vthelab.com/math.html">
+<meta property="og:image" content="https://vthelab.com/assets/og.png">
+<meta property="og:site_name" content="The V Lab">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The V Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Writing math in Markdown and LaTeX | The V Lab">
+<meta name="twitter:description" content="How to write mathematical formulas in Markdown, R Markdown, Quarto, Jupyter, GitHub and LaTeX, with worked statistics examples and a live preview.">
+<meta name="twitter:image" content="https://vthelab.com/assets/og.png">
+<meta name="theme-color" content="#13293d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="vlab-brand" href="index.html" aria-label="The V Lab home">
+      <span class="vlab-mark" aria-hidden="true">V</span>
+      <span class="vlab-name">The V Lab</span>
+    </a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="learn.html" aria-current="page">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="hero compact">
+  <div class="wrap">
+    <h1>Writing math in Markdown and LaTeX</h1>
+    <p class="lede">A working reference for the formulas health data work needs: where the dollar signs go in each tool, the commands you will use every day, how to number equations, and the small mistakes that break a document. Every example shows its source next to the result.</p>
+    <nav class="toc" aria-label="On this page"><a href="#where">Where math goes</a><a href="#everyday">Everyday syntax</a><a href="#multiline">Multi-line and numbered</a><a href="#stats">Statistics examples</a><a href="#pitfalls">Common mistakes</a><a href="#try">Try it</a></nav>
+  </div>
+</div>
+<section id="where">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Where math goes</h2><p>All of these tools read the same LaTeX commands. What changes is how you mark where a formula starts and ends: <b>inline</b> math sits inside a sentence, <b>display</b> math gets its own centred line.</p></div></div>
+    <div class="table-scroll">
+      <table class="fn-table where-table">
+        <thead><tr><th scope="col">Where you are writing</th><th scope="col">Inline</th><th scope="col">Display</th><th scope="col">Note</th></tr></thead>
+        <tbody><tr><td>LaTeX document</td><td><code>\( … \)  or  $ … $</code></td><td><code>\[ … \]  or an equation environment</code></td><td><code>$$</code> works but is discouraged in LaTeX; use <code>\[ … \]</code>.</td></tr><tr><td>R Markdown and Quarto</td><td><code>$ … $</code></td><td><code>$$ … $$</code></td><td>Pandoc rules: no space just inside the dollar signs.</td></tr><tr><td>Jupyter notebooks</td><td><code>$ … $</code></td><td><code>$$ … $$</code></td><td>Rendered by MathJax in Markdown cells.</td></tr><tr><td>GitHub Markdown</td><td><code>$ … $  or  $`… `$</code></td><td><code>$$ … $$  or a ```math block</code></td><td>The backtick form protects underscores and asterisks.</td></tr></tbody>
+      </table>
+    </div>
+    <div class="grid grid-2" style="margin-top:22px">
+      <div class="code-wrap"><p class="code-cap">In Markdown</p><pre><code>The admission rate was $p = 0.194$ across $n = 30{,}000$ visits.
+
+$$
+\hat{p} = \frac{5810}{30000}
+$$</code></pre><button class="copy" type="button" data-copy="The admission rate was $p = 0.194$ across $n = 30{,}000$ visits.
+
+$$
+\hat{p} = \frac{5810}{30000}
+$$">Copy</button></div>
+      <div class="code-wrap"><p class="code-cap">In a LaTeX document</p><pre><code>The admission rate was \(p = 0.194\) across \(n = 30{,}000\) visits.
+
+\[
+\hat{p} = \frac{5810}{30000}
+\]</code></pre><button class="copy" type="button" data-copy="The admission rate was \(p = 0.194\) across \(n = 30{,}000\) visits.
+
+\[
+\hat{p} = \frac{5810}{30000}
+\]">Copy</button></div>
+    </div>
+    <p class="p-note">Writing <code>30{,}000</code> inside math stops the comma from adding a space after it.</p>
+  </div>
+</section>
+<section id="everyday">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Everyday syntax</h2><p>The commands that cover most formulas in a methods section. Copy the source on the left; the right shows how it renders.</p></div></div>
+    <div class="ex-group"><h3>Subscripts and superscripts</h3><div class="ex"><div class="ex-src"><pre><code>x_i^2 + x_{ij} + e^{-\lambda t}</code></pre><button class="copy" type="button" data-copy="x_i^2 + x_{ij} + e^{-\lambda t}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="x_i^2 + x_{ij} + e^{-\lambda t}">x_i^2 + x_{ij} + e^{-\lambda t}</div><p class="ex-note">Use braces when a sub- or superscript has more than one character.</p></div></div></div><div class="ex-group"><h3>Fractions and roots</h3><div class="ex"><div class="ex-src"><pre><code>\frac{a}{b} \qquad \dfrac{\sum x_i}{n} \qquad \sqrt{n} \qquad \sqrt[3]{x}</code></pre><button class="copy" type="button" data-copy="\frac{a}{b} \qquad \dfrac{\sum x_i}{n} \qquad \sqrt{n} \qquad \sqrt[3]{x}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\frac{a}{b} \qquad \dfrac{\sum x_i}{n} \qquad \sqrt{n} \qquad \sqrt[3]{x}">\frac{a}{b} \qquad \dfrac{\sum x_i}{n} \qquad \sqrt{n} \qquad \sqrt[3]{x}</div><p class="ex-note">\dfrac keeps a fraction full size inside running text.</p></div></div></div><div class="ex-group"><h3>Greek letters, hats and bars</h3><div class="ex"><div class="ex-src"><pre><code>\alpha,\ \beta,\ \mu,\ \sigma^2,\ \hat{\beta},\ \bar{x},\ \tilde{y},\ \Delta</code></pre><button class="copy" type="button" data-copy="\alpha,\ \beta,\ \mu,\ \sigma^2,\ \hat{\beta},\ \bar{x},\ \tilde{y},\ \Delta">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\alpha,\ \beta,\ \mu,\ \sigma^2,\ \hat{\beta},\ \bar{x},\ \tilde{y},\ \Delta">\alpha,\ \beta,\ \mu,\ \sigma^2,\ \hat{\beta},\ \bar{x},\ \tilde{y},\ \Delta</div><p class="ex-note">Capital Greek letters use a capital first letter: \Delta, \Sigma, \Omega.</p></div></div></div><div class="ex-group"><h3>Sums, products and integrals</h3><div class="ex"><div class="ex-src"><pre><code>\sum_{i=1}^{n} x_i \qquad \prod_{j=1}^{k} p_j \qquad \int_{0}^{\infty} f(t)\,dt</code></pre><button class="copy" type="button" data-copy="\sum_{i=1}^{n} x_i \qquad \prod_{j=1}^{k} p_j \qquad \int_{0}^{\infty} f(t)\,dt">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\sum_{i=1}^{n} x_i \qquad \prod_{j=1}^{k} p_j \qquad \int_{0}^{\infty} f(t)\,dt">\sum_{i=1}^{n} x_i \qquad \prod_{j=1}^{k} p_j \qquad \int_{0}^{\infty} f(t)\,dt</div><p class="ex-note">\, adds a thin space before dt.</p></div></div></div><div class="ex-group"><h3>Brackets that grow</h3><div class="ex"><div class="ex-src"><pre><code>\left( \frac{p}{1-p} \right) \qquad \left[ \sum_i w_i \right] \qquad \left\{ x : x &gt; 0 \right\}</code></pre><button class="copy" type="button" data-copy="\left( \frac{p}{1-p} \right) \qquad \left[ \sum_i w_i \right] \qquad \left\{ x : x &gt; 0 \right\}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\left( \frac{p}{1-p} \right) \qquad \left[ \sum_i w_i \right] \qquad \left\{ x : x &gt; 0 \right\}">\left( \frac{p}{1-p} \right) \qquad \left[ \sum_i w_i \right] \qquad \left\{ x : x &gt; 0 \right\}</div><p class="ex-note">Every \left needs a matching \right.</p></div></div></div><div class="ex-group"><h3>Functions and operators</h3><div class="ex"><div class="ex-src"><pre><code>\log(x),\ \exp(\eta),\ \operatorname{logit}(p),\ \operatorname{Var}(Y),\ \max_i x_i</code></pre><button class="copy" type="button" data-copy="\log(x),\ \exp(\eta),\ \operatorname{logit}(p),\ \operatorname{Var}(Y),\ \max_i x_i">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\log(x),\ \exp(\eta),\ \operatorname{logit}(p),\ \operatorname{Var}(Y),\ \max_i x_i">\log(x),\ \exp(\eta),\ \operatorname{logit}(p),\ \operatorname{Var}(Y),\ \max_i x_i</div><p class="ex-note">Upright names with correct spacing. Avoid typing log or logit as plain letters.</p></div></div></div><div class="ex-group"><h3>Probability and expectation</h3><div class="ex"><div class="ex-src"><pre><code>P(Y = 1 \mid X = x) \qquad \mathbb{E}[Y \mid X] \qquad Y \sim \operatorname{Bernoulli}(p)</code></pre><button class="copy" type="button" data-copy="P(Y = 1 \mid X = x) \qquad \mathbb{E}[Y \mid X] \qquad Y \sim \operatorname{Bernoulli}(p)">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="P(Y = 1 \mid X = x) \qquad \mathbb{E}[Y \mid X] \qquad Y \sim \operatorname{Bernoulli}(p)">P(Y = 1 \mid X = x) \qquad \mathbb{E}[Y \mid X] \qquad Y \sim \operatorname{Bernoulli}(p)</div><p class="ex-note">Use \mid for 'given', not a typed vertical bar.</p></div></div></div><div class="ex-group"><h3>Relations</h3><div class="ex"><div class="ex-src"><pre><code>a \le b,\ a \ge b,\ a \ne b,\ a \approx b,\ a \propto b,\ A \subseteq B,\ x \in \mathbb{R}</code></pre><button class="copy" type="button" data-copy="a \le b,\ a \ge b,\ a \ne b,\ a \approx b,\ a \propto b,\ A \subseteq B,\ x \in \mathbb{R}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="a \le b,\ a \ge b,\ a \ne b,\ a \approx b,\ a \propto b,\ A \subseteq B,\ x \in \mathbb{R}">a \le b,\ a \ge b,\ a \ne b,\ a \approx b,\ a \propto b,\ A \subseteq B,\ x \in \mathbb{R}</div></div></div></div><div class="ex-group"><h3>Vectors and matrices</h3><div class="ex"><div class="ex-src"><pre><code>\boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix}, \quad \mathbf{X}^\top \mathbf{X}</code></pre><button class="copy" type="button" data-copy="\boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix}, \quad \mathbf{X}^\top \mathbf{X}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix}, \quad \mathbf{X}^\top \mathbf{X}">\boldsymbol{\beta} = \begin{pmatrix} \beta_0 \\ \beta_1 \end{pmatrix}, \quad \mathbf{X}^\top \mathbf{X}</div><p class="ex-note">pmatrix gives round brackets, bmatrix square ones; \\ starts a new row and & separates columns.</p></div></div></div><div class="ex-group"><h3>Words inside math</h3><div class="ex"><div class="ex-src"><pre><code>\text{LOS}_i = \beta_0 + \beta_1\,\text{ED time}_i + \varepsilon_i</code></pre><button class="copy" type="button" data-copy="\text{LOS}_i = \beta_0 + \beta_1\,\text{ED time}_i + \varepsilon_i">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\text{LOS}_i = \beta_0 + \beta_1\,\text{ED time}_i + \varepsilon_i">\text{LOS}_i = \beta_0 + \beta_1\,\text{ED time}_i + \varepsilon_i</div><p class="ex-note">\text keeps normal spacing between words.</p></div></div></div><div class="ex-group"><h3>Piecewise definitions</h3><div class="ex"><div class="ex-src"><pre><code>Y_i = \begin{cases} 1 &amp; \text{if admitted} \\ 0 &amp; \text{otherwise} \end{cases}</code></pre><button class="copy" type="button" data-copy="Y_i = \begin{cases} 1 &amp; \text{if admitted} \\ 0 &amp; \text{otherwise} \end{cases}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="Y_i = \begin{cases} 1 &amp; \text{if admitted} \\ 0 &amp; \text{otherwise} \end{cases}">Y_i = \begin{cases} 1 &amp; \text{if admitted} \\ 0 &amp; \text{otherwise} \end{cases}</div></div></div></div>
+  </div>
+</section>
+<section id="multiline">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Multi-line and numbered equations</h2><p>Use <code>&amp;</code> to mark the point each line lines up on, usually just before the equals sign, and <code>\\</code> to end a line.</p></div></div>
+    <div class="ex-group"><h3>Aligned lines inside Markdown</h3><div class="ex"><div class="ex-src"><pre><code>$$
+\begin{aligned}
+\hat{p}_1 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 1, \mathbf{X}_i) \\
+\hat{p}_0 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 0, \mathbf{X}_i)
+\end{aligned}
+$$</code></pre><button class="copy" type="button" data-copy="$$
+\begin{aligned}
+\hat{p}_1 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 1, \mathbf{X}_i) \\
+\hat{p}_0 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 0, \mathbf{X}_i)
+\end{aligned}
+$$">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\begin{aligned}
+\hat{p}_1 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 1, \mathbf{X}_i) \\
+\hat{p}_0 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 0, \mathbf{X}_i)
+\end{aligned}">\begin{aligned}
+\hat{p}_1 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 1, \mathbf{X}_i) \\
+\hat{p}_0 &amp;= \frac{1}{n} \sum_{i=1}^{n} \hat{P}(Y_i = 1 \mid A_i = 0, \mathbf{X}_i)
+\end{aligned}</div><p class="ex-note">In Markdown, R Markdown, Quarto, Jupyter and GitHub, put aligned inside $$ … $$.</p></div></div></div>
+    <div class="ex-group">
+      <h3>Numbering and cross-references</h3>
+      <div class="grid grid-3">
+        <div class="code-wrap"><p class="code-cap">LaTeX document: align numbers each line; \nonumber skips one</p><pre><code>\begin{align}
+\operatorname{logit} P(Y_{ij} = 1) &amp;= \beta_0 + \beta_1 \text{Asthma}_{ij} + u_j \label{eq:glmm} \\
+u_j &amp;\sim N(0, \tau^2) \nonumber
+\end{align}
+
+Equation~\eqref{eq:glmm} adds a hospital random intercept.</code></pre><button class="copy" type="button" data-copy="\begin{align}
+\operatorname{logit} P(Y_{ij} = 1) &amp;= \beta_0 + \beta_1 \text{Asthma}_{ij} + u_j \label{eq:glmm} \\
+u_j &amp;\sim N(0, \tau^2) \nonumber
+\end{align}
+
+Equation~\eqref{eq:glmm} adds a hospital random intercept.">Copy</button></div>
+        <div class="code-wrap"><p class="code-cap">R Markdown with bookdown</p><pre><code>\begin{equation}
+\text{RR} = \frac{p_1}{p_0}
+(\#eq:rr)
+\end{equation}
+
+The risk ratio in Equation \@ref(eq:rr) ...</code></pre><button class="copy" type="button" data-copy="\begin{equation}
+\text{RR} = \frac{p_1}{p_0}
+(\#eq:rr)
+\end{equation}
+
+The risk ratio in Equation \@ref(eq:rr) ...">Copy</button></div>
+        <div class="code-wrap"><p class="code-cap">Quarto</p><pre><code>$$
+\text{RR} = \frac{p_1}{p_0}
+$$ {#eq-rr}
+
+The risk ratio in @eq-rr ...</code></pre><button class="copy" type="button" data-copy="$$
+\text{RR} = \frac{p_1}{p_0}
+$$ {#eq-rr}
+
+The risk ratio in @eq-rr ...">Copy</button></div>
+      </div>
+      <p class="p-note">Plain R Markdown (html_document) and plain Markdown do not number equations. You need bookdown output formats such as <code>bookdown::html_document2</code>, or Quarto.</p>
+    </div>
+  </div>
+</section>
+<section id="stats">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Statistics examples from Project 001</h2><p>The models behind the <a href="projects.html#project-001">ED-to-Inpatient Pathways</a> memos, written out. They combine most of the syntax above.</p></div></div>
+    <div class="ex-group"><h3>A03: logistic regression for admission</h3><div class="ex"><div class="ex-src"><pre><code>\operatorname{logit}\, P(Y_i = 1) = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k]</code></pre><button class="copy" type="button" data-copy="\operatorname{logit}\, P(Y_i = 1) = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k]">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\operatorname{logit}\, P(Y_i = 1) = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k]">\operatorname{logit}\, P(Y_i = 1) = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k]</div><p class="ex-note">Admission on ED time before the disposition decision, with CTAS 1 as the reference level.</p></div></div></div><div class="ex-group"><h3>A05: linear regression for length of stay</h3><div class="ex"><div class="ex-src"><pre><code>\text{LOS}_i = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k] + \varepsilon_i, \quad \varepsilon_i \sim N(0, \sigma^2)</code></pre><button class="copy" type="button" data-copy="\text{LOS}_i = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k] + \varepsilon_i, \quad \varepsilon_i \sim N(0, \sigma^2)">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\text{LOS}_i = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k] + \varepsilon_i, \quad \varepsilon_i \sim N(0, \sigma^2)">\text{LOS}_i = \beta_0 + \beta_1\, \text{ED time}_i + \sum_{k=2}^{5} \gamma_k\, \mathbf{1}[\text{CTAS}_i = k] + \varepsilon_i, \quad \varepsilon_i \sim N(0, \sigma^2)</div><p class="ex-note">Inpatient days in the linked cohort.</p></div></div></div><div class="ex-group"><h3>A07: propensity score</h3><div class="ex"><div class="ex-src"><pre><code>e(\mathbf{x}_i) = P(A_i = 1 \mid \mathbf{X}_i = \mathbf{x}_i)</code></pre><button class="copy" type="button" data-copy="e(\mathbf{x}_i) = P(A_i = 1 \mid \mathbf{X}_i = \mathbf{x}_i)">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="e(\mathbf{x}_i) = P(A_i = 1 \mid \mathbf{X}_i = \mathbf{x}_i)">e(\mathbf{x}_i) = P(A_i = 1 \mid \mathbf{X}_i = \mathbf{x}_i)</div><p class="ex-note">The probability of an asthma visit (A = 1) given baseline characteristics, used for 1:1 matching within hospital.</p></div></div></div><div class="ex-group"><h3>A08: risk difference and risk ratio</h3><div class="ex"><div class="ex-src"><pre><code>\widehat{\text{RD}} = \hat{p}_1 - \hat{p}_0, \qquad \widehat{\text{RR}} = \frac{\hat{p}_1}{\hat{p}_0}</code></pre><button class="copy" type="button" data-copy="\widehat{\text{RD}} = \hat{p}_1 - \hat{p}_0, \qquad \widehat{\text{RR}} = \frac{\hat{p}_1}{\hat{p}_0}">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\widehat{\text{RD}} = \hat{p}_1 - \hat{p}_0, \qquad \widehat{\text{RR}} = \frac{\hat{p}_1}{\hat{p}_0}">\widehat{\text{RD}} = \hat{p}_1 - \hat{p}_0, \qquad \widehat{\text{RR}} = \frac{\hat{p}_1}{\hat{p}_0}</div><p class="ex-note">Standardized admission risks for the asthma and control scenarios.</p></div></div></div><div class="ex-group"><h3>A09: logistic GLMM with a hospital random intercept</h3><div class="ex"><div class="ex-src"><pre><code>\operatorname{logit}\, P(Y_{ij} = 1) = \beta_0 + \beta_1\, \text{Asthma}_{ij} + \boldsymbol{\gamma}^\top \text{Region}_j + u_j, \qquad u_j \sim N(0, \tau^2)</code></pre><button class="copy" type="button" data-copy="\operatorname{logit}\, P(Y_{ij} = 1) = \beta_0 + \beta_1\, \text{Asthma}_{ij} + \boldsymbol{\gamma}^\top \text{Region}_j + u_j, \qquad u_j \sim N(0, \tau^2)">Copy</button></div><div class="ex-out"><div class="tex" data-mode="display" data-tex="\operatorname{logit}\, P(Y_{ij} = 1) = \beta_0 + \beta_1\, \text{Asthma}_{ij} + \boldsymbol{\gamma}^\top \text{Region}_j + u_j, \qquad u_j \sim N(0, \tau^2)">\operatorname{logit}\, P(Y_{ij} = 1) = \beta_0 + \beta_1\, \text{Asthma}_{ij} + \boldsymbol{\gamma}^\top \text{Region}_j + u_j, \qquad u_j \sim N(0, \tau^2)</div><p class="ex-note">Patient i in hospital j; u_j captures how patients at the same hospital resemble each other.</p></div></div></div>
+  </div>
+</section>
+<section id="pitfalls">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Common mistakes</h2><p>Most broken formulas come from one of these.</p></div></div>
+    <ul class="pitfalls"><li><h3>A space just inside the dollar signs</h3><p>In R Markdown, Quarto and other Pandoc-based tools, <code>$ x $</code> is not treated as math. The opening <code>$</code> must be followed directly by a character, and the closing <code>$</code> must follow one directly.</p><pre class="fix"><code>Write $x$, not $ x $</code></pre></li><li><h3>Dollar signs that mean money</h3><p>A sentence such as <em>costs rose from $5 to $10</em> can turn into broken math. Escape the sign as <code>\$</code> in Markdown.</p><pre class="fix"><code>Costs rose from \$5 to \$10.</code></pre></li><li><h3>Percent signs in LaTeX</h3><p>In a LaTeX document <code>%</code> starts a comment and silently deletes the rest of the line. Write <code>\%</code>.</p><pre class="fix"><code>Admission rate was 19.4\%.</code></pre></li><li><h3>Blank lines inside display math</h3><p>An empty line inside <code>$$ … $$</code> or an <code>equation</code> environment ends the paragraph and breaks the formula. Keep display math free of blank lines.</p></li><li><h3>Markdown eating underscores and asterisks</h3><p>Some renderers, GitHub among them, can read <code>_</code> or <code>*</code> inside <code>$…$</code> as emphasis. On GitHub, wrap inline math as <code>$`…`$</code> or use a <code>```math</code> block.</p><pre class="fix"><code>$`x_{i} * y_{i}`$</code></pre></li><li><h3>align versus aligned</h3><p><code>align</code> is a stand-alone environment for LaTeX documents and must not sit inside <code>$$</code>. Inside <code>$$ … $$</code> in Markdown, use <code>aligned</code>.</p></li><li><h3>Functions typed as letters</h3><p><code>log(x)</code> renders as the italic product <em>l·o·g</em>. Use <code>\log</code>, <code>\exp</code> and <code>\operatorname{logit}</code>.</p></li><li><h3>Commands your renderer does not know</h3><p>KaTeX, MathJax and full LaTeX support different command sets. If a formula works in your PDF but not on a web page, check the renderer's list of supported functions before rewriting the maths.</p></li></ul>
+  </div>
+</section>
+<section id="try">
+  <div class="wrap">
+    <div class="section-head"><div><h2>Try it</h2><p>Type LaTeX math without dollar signs and see it render as you go. Rendering uses KaTeX, the same engine as this page.</p></div></div>
+    <div class="playground">
+      <div>
+        <label for="tex-in">LaTeX</label>
+        <textarea id="tex-in" rows="6" spellcheck="false" autocapitalize="off">\operatorname{logit}\, P(Y_i = 1) = \beta_0 + \beta_1 x_i</textarea>
+        <label class="inline-toggle"><input type="checkbox" id="tex-display" checked> Display style</label>
+      </div>
+      <div>
+        <p class="pg-label" id="tex-out-label">Result</p>
+        <div id="tex-out" class="pg-out" aria-live="polite" aria-labelledby="tex-out-label"></div>
+        <p id="tex-err" class="pg-err" role="status"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="vlab-brand" href="index.html" aria-label="The V Lab home"><span class="vlab-mark" aria-hidden="true">V</span><span class="vlab-name">The V Lab</span></a>
+      <p style="margin:12px 0 0;max-width:46ch">A health data science notebook: projects on synthetic Alberta health data, open guides and R tooling. Educational use only; no patient-level data.</p>
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="learn.html" aria-current="page">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="https://github.com/LaboratoireV">GitHub</a></nav>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script>
+(function () {
+  var ok = typeof window.katex !== "undefined";
+  document.querySelectorAll(".tex").forEach(function (el) {
+    if (!ok) return;
+    try {
+      katex.render(el.getAttribute("data-tex"), el, { displayMode: el.dataset.mode === "display", throwOnError: false });
+      el.classList.add("rendered");
+    } catch (e) { /* leave the source visible */ }
+  });
+
+  document.querySelectorAll("button.copy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var text = b.getAttribute("data-copy");
+      var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { b.textContent = "Select and copy"; });
+      } else { b.textContent = "Select and copy"; }
+    });
+  });
+
+  var input = document.getElementById("tex-in"), out = document.getElementById("tex-out"),
+      err = document.getElementById("tex-err"), disp = document.getElementById("tex-display");
+  function draw() {
+    if (!ok) { err.textContent = "The math renderer did not load. Check your connection and reload the page."; return; }
+    try {
+      katex.render(input.value, out, { displayMode: disp.checked, throwOnError: true });
+      err.textContent = "";
+    } catch (e) {
+      err.textContent = String(e.message || e).replace(/^KaTeX parse error: /, "Can't render yet: ");
+    }
+  }
+  input.addEventListener("input", draw);
+  disp.addEventListener("change", draw);
+  draw();
+})();
+</script>
+</body>
+</html>
