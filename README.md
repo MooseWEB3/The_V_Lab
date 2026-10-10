@@ -2,7 +2,7 @@
 
 The home page of The V Lab: open learning guides, synthetic-data projects and R tooling for health data science.
 
-**Live site:** https://laboratoirev.github.io/The_V_Lab/
+**Live site:** https://mooseweb3.github.io/The_V_Lab/
 
 ## Pages
 
@@ -28,6 +28,6 @@ This site is a portal. Course pages stay in their own repositories and are linke
 
 ## Publishing
 
-Plain HTML and CSS, no build step. In **Settings → Pages**, set the source to *Deploy from a branch*, branch `main`, folder `/ (root)`.
+Plain HTML and CSS, no build step. The repository has to be **public**. In **Settings → Pages**, set the source to *Deploy from a branch*, branch `main`, folder `/ (root)`. The site is then published at https://mooseweb3.github.io/The_V_Lab/
 
-Shared styles live in `assets/styles.css` and use the same navy and teal palette as the course pages, with a dark-mode variant.
+`.nojekyll` stops GitHub from running Jekyll if Pages is ever switched back to branch deploy. Shared styles live in `assets/styles.css` and use the same navy and teal palette as the course pages, with a dark-mode variant.
