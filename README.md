@@ -2,7 +2,7 @@
 
 The home page of The V Lab: open learning guides, synthetic-data projects and R tooling for health data science.
 
-**Live site:** https://mooseweb3.github.io/The_V_Lab/
+**Live site:** https://vthelab.com/
 
 ## Pages
 
@@ -28,6 +28,8 @@ This site is a portal. Course pages stay in their own repositories and are linke
 
 ## Publishing
 
-Plain HTML and CSS, no build step. The repository has to be **public**. In **Settings → Pages**, set the source to *Deploy from a branch*, branch `main`, folder `/ (root)`. The site is then published at https://mooseweb3.github.io/The_V_Lab/
+Plain HTML and CSS, no build step. Hosted on [Render](https://render.com) as a Static Site (service `the-v-lab`) built from this repository: branch `main`, no build command, publish directory `.`. Every push to `main` redeploys automatically.
+
+Custom domain **vthelab.com** (DNS at Porkbun): `ALIAS` on the root and `CNAME` on `www`, both pointing to `the-v-lab.onrender.com`; `www` redirects to the root. All canonical and Open Graph URLs use `https://vthelab.com/`, and `404.html` uses root-relative paths, so the site must be served from the domain root.
 
 `.nojekyll` stops GitHub from running Jekyll if Pages is ever switched back to branch deploy. Shared styles live in `assets/styles.css` and use the same navy and teal palette as the course pages, with a dark-mode variant.
