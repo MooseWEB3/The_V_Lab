@@ -1,0 +1,33 @@
+# The V Lab
+
+The home page of The V Lab: open learning guides, synthetic-data projects and R tooling for health data science.
+
+**Live site:** https://laboratoirev.github.io/The_V_Lab/
+
+## Pages
+
+| Page | What it covers |
+|---|---|
+| `index.html` | Lab overview, learning tracks, featured project, recent updates |
+| `learn.html` | Searchable catalog of all 22 English guides across five tracks |
+| `projects.html` | Project 001 (synthetic NACRS & DAD) and the Alberta Health Data Atlas |
+| `tools.html` | VLabR R package and Python Lab |
+| `about.html` | How the lab works, track hubs, contact |
+
+## How it connects to the other repositories
+
+This site is a portal. Course pages stay in their own repositories and are linked from here:
+
+- [Statistics_Study](https://github.com/LaboratoireV/Statistics_Study) — biostatistics (14 guides)
+- [Epidemiology_Study](https://github.com/LaboratoireV/Epidemiology_Study) — epidemiology (3 guides)
+- [Data_Visulization](https://github.com/LaboratoireV/Data_Visulization) — ggplot2 and Plotly
+- [RMarkdown_Skills](https://github.com/LaboratoireV/RMarkdown_Skills) — R Markdown
+- [SNOWFLAKE_Skills](https://github.com/LaboratoireV/SNOWFLAKE_Skills) and [ArcGIS_Study](https://github.com/LaboratoireV/ArcGIS_Study) — linked to the repositories until GitHub Pages is enabled there
+- [Project001_HealthData](https://github.com/LaboratoireV/Project001_HealthData) and [HealthcareData_Knowledge](https://github.com/LaboratoireV/HealthcareData_Knowledge) — projects
+- [VLabR](https://github.com/LaboratoireV/VLabR) and [Python_Lab](https://github.com/LaboratoireV/Python_Lab) — tools
+
+## Publishing
+
+Plain HTML and CSS, no build step. In **Settings → Pages**, set the source to *Deploy from a branch*, branch `main`, folder `/ (root)`.
+
+Shared styles live in `assets/styles.css` and use the same navy and teal palette as the course pages, with a dark-mode variant.

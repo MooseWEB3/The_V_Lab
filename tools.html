@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools | The V Lab</title>
+<meta name="description" content="VLabR, an R package for health-data cleaning and de-identification, and Python practice notes.">
+<link rel="canonical" href="https://laboratoirev.github.io/The_V_Lab/tools.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tools | The V Lab">
+<meta property="og:description" content="VLabR, an R package for health-data cleaning and de-identification, and Python practice notes.">
+<meta property="og:url" content="https://laboratoirev.github.io/The_V_Lab/tools.html">
+<meta property="og:image" content="https://laboratoirev.github.io/The_V_Lab/assets/og.png">
+<meta name="theme-color" content="#17324d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="vlab-brand" href="index.html" aria-label="The V Lab home">
+      <span class="vlab-mark" aria-hidden="true">V</span>
+      <span class="vlab-name">The V Lab</span>
+    </a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="learn.html">Learn</a><a href="projects.html">Projects</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="hero compact">
+  <div class="wrap">
+    <span class="eyebrow">Tools</span>
+    <h1>Tools</h1>
+    <p class="lede">The small utilities that keep everyday analysis quick, consistent and safe to share.</p>
+  </div>
+</div>
+<section>
+  <div class="wrap">
+    <div class="grid grid-2" style="align-items:start">
+      <div class="prose">
+        <span class="tag teal">R package</span>
+        <h2 style="margin-top:10px">VLabR</h2>
+        <p>A lightweight R package for common data-cleaning and summary-table tasks in health data work: tidy column names, duplicate and uniqueness checks, one-row summaries, covariate balance, stable de-identified IDs and personal-name masking. Name masking can use Python and spaCy when available, with a pure-R fallback for locked-down work computers. Requires R 4.1.0 or later.</p>
+        <p><a href="https://github.com/LaboratoireV/VLabR"><b>View VLabR on GitHub →</b></a></p>
+      </div>
+      <div>
+        <p style="margin:0 0 8px;font-weight:700;color:var(--navy)">Install</p>
+<pre><code>install.packages("remotes")
+remotes::install_github("LaboratoireV/VLabR", upgrade = "never")
+
+library(VLabR)
+vlab_load_vlabr_packages()</code></pre>
+      </div>
+    </div>
+    <h3 style="margin:36px 0 12px">Selected functions</h3>
+    <div class="table-scroll">
+      <table class="fn-table">
+        <thead><tr><th scope="col">Function</th><th scope="col">What it does</th></tr></thead>
+        <tbody><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Data cleaning</th></tr><tr><td><code>vlab_fix_colname()</code></td><td>Clean column names: strip special characters, replace spaces.</td></tr><tr><td><code>vlab_boost_data()</code></td><td>Detect and convert date-like columns automatically.</td></tr><tr><td><code>vlab_date_conversion()</code></td><td>Convert input to R Date or date-time values.</td></tr><tr><td><code>vlab_quote_rm()</code></td><td>Remove stray quotes from character and factor columns.</td></tr><tr><td><code>vlab_get_duplicates()</code></td><td>Return duplicate rows by one or more keys.</td></tr><tr><td><code>vlab_check_unique()</code></td><td>Check whether a column is unique.</td></tr><tr><td><code>vlab_data_type()</code></td><td>Classify columns by analysis type.</td></tr><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Summary tables</th></tr><tr><td><code>vlab_1_cat()</code></td><td>One-row n (%) table for a categorical variable.</td></tr><tr><td><code>vlab_1_cont()</code></td><td>One-line summary for a continuous variable.</td></tr><tr><td><code>vlab_cross_table()</code></td><td>Two-variable cross table.</td></tr><tr><td><code>vlab_count_unique_categories()</code></td><td>Count unique non-missing categories.</td></tr><tr><td><code>vlab_compare_balance()</code></td><td>Compare covariate balance between two data frames.</td></tr><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">De-identification</th></tr><tr><td><code>vlab_SID_creator()</code></td><td>Stable de-identified study ID from name, date of birth and gender.</td></tr><tr><td><code>mask_person_names()</code></td><td>Detect and mask personal names in free text (spaCy, with a pure-R fallback).</td></tr><tr><td><code>vlab_mask_PHN()</code></td><td>Mask Alberta Personal Health Numbers near a PHN label.</td></tr><tr><td><code>vlab_mask()</code></td><td>Mask vector values from the front or back.</td></tr><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Geography &amp; reference data</th></tr><tr><td><code>vlab_travel()</code></td><td>Road travel distance and time for origin–destination pairs via OSRM.</td></tr><tr><td><code>vlab_google_travel()</code></td><td>The same using Google routing.</td></tr><tr><td><code>Alberta reference sets</code></td><td>Municipalities, health facilities, schools and Health Canada drug products.</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="card" style="max-width:720px">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></div>
+      <span class="tag">Practice notes</span>
+      <h3>Python Lab</h3>
+      <p>A running set of beginner Python exercises — variables, type casting, input, conditionals, string methods, loops and functions — written as small, printable programs.</p>
+      <div class="links"><a href="https://github.com/LaboratoireV/Python_Lab">View on GitHub →</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="vlab-brand" href="index.html" aria-label="The V Lab home"><span class="vlab-mark" aria-hidden="true">V</span><span class="vlab-name">The V Lab</span></a>
+      <p style="margin:12px 0 0;max-width:46ch">Open learning guides, synthetic-data projects and R tooling for health data science. Educational use only; no patient-level data.</p>
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="learn.html">Learn</a><a href="projects.html">Projects</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="https://github.com/LaboratoireV">GitHub</a></nav>
+  </div>
+</footer>
+</body>
+</html>

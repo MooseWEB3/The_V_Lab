@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | The V Lab</title>
+<meta name="description" content="Project 001 (synthetic NACRS &amp; DAD consulting study) and the Alberta Health Data Atlas.">
+<link rel="canonical" href="https://laboratoirev.github.io/The_V_Lab/projects.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects | The V Lab">
+<meta property="og:description" content="Project 001 (synthetic NACRS &amp; DAD consulting study) and the Alberta Health Data Atlas.">
+<meta property="og:url" content="https://laboratoirev.github.io/The_V_Lab/projects.html">
+<meta property="og:image" content="https://laboratoirev.github.io/The_V_Lab/assets/og.png">
+<meta name="theme-color" content="#17324d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="vlab-brand" href="index.html" aria-label="The V Lab home">
+      <span class="vlab-mark" aria-hidden="true">V</span>
+      <span class="vlab-name">The V Lab</span>
+    </a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="learn.html">Learn</a><a href="projects.html" aria-current="page">Projects</a><a href="tools.html">Tools</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="hero compact">
+  <div class="wrap">
+    <span class="eyebrow">Projects</span>
+    <h1>Projects</h1>
+    <p class="lede">Applied work on Alberta health data — designed from official documentation and built entirely on synthetic or public information.</p>
+  </div>
+</div>
+<section>
+  <div class="wrap">
+    <div class="feature">
+      <div>
+        <span class="tag teal">Project 001 · Synthetic health data consulting</span>
+        <h3>Emergency visits, hospitalization and length of stay</h3>
+        <p>Project 001 generates synthetic NACRS-style emergency records (30,000 visits, 34 variables) and DAD-style inpatient records (60,000 stays, 51 variables) so two linked questions can be studied without real patients. It is a fictional consulting demonstration — not a real contract, hospital or patient population.</p>
+        <ul class="checklist">
+          <li><b>Question 1:</b> do CTAS level and pre-disposition time affect whether an emergency patient is hospitalized?</li>
+          <li><b>Question 2:</b> among admitted patients, how do acuity and emergency stay relate to inpatient length of stay?</li>
+          <li>Reproducible R workflow with <code>renv</code>, a variable dictionary and example reports</li>
+        </ul>
+        <div class="hero-actions" style="margin-top:22px">
+          <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Open project site</a>
+          <a class="btn btn-outline" href="https://github.com/LaboratoireV/Project001_HealthData">Source</a>
+        </div>
+      </div>
+      <img src="assets/project001.jpg" alt="Preview of the Project 001 website" loading="lazy" width="1200" height="630">
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>Consulting memos</h3>
+      <p>The analysis is written up as a sequence of memos, from scoping to findings.</p>
+      <div class="links"><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A00.html">A00</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A01.html">A01</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A02.html">A02</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A03.html">A03</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A04.html">A04</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A05.html">A05</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="feature">
+      <div>
+        <span class="tag">Reference · Interactive site</span>
+        <h3>Alberta Health Data Atlas</h3>
+        <p>An interactive learning atlas of nine commonly used Alberta administrative health datasets and clinical information systems. It is the reference Project 001 was designed from.</p>
+        <ul class="checklist">
+          <li>DAD, NACRS, Practitioner Claims, Lab, PIN, Vital Statistics, Registry, Sunrise Clinical Manager, Connect Care</li>
+          <li>Deep dives on DAD, NACRS and PIN, with field maps and fictional example records</li>
+          <li>Cohort design, linkage notes, access pathways and a responsible-use checklist</li>
+        </ul>
+        <div class="hero-actions" style="margin-top:22px">
+          <a class="btn btn-primary" href="https://alberta-health-data-atlas.tigerdogai.chatgpt.site">Open the Atlas</a>
+          <a class="btn btn-outline" href="https://github.com/LaboratoireV/HealthcareData_Knowledge">Source</a>
+        </div>
+      </div>
+      <img src="assets/atlas.jpg" alt="Preview of the Alberta Health Data Atlas" loading="lazy" width="1200" height="630">
+    </div>
+    <p class="note" style="margin-top:18px">Independent educational resources. Not official publications of Alberta Health Services, the University of Calgary, the Government of Alberta or CIHI, and no patient-level data is included.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="vlab-brand" href="index.html" aria-label="The V Lab home"><span class="vlab-mark" aria-hidden="true">V</span><span class="vlab-name">The V Lab</span></a>
+      <p style="margin:12px 0 0;max-width:46ch">Open learning guides, synthetic-data projects and R tooling for health data science. Educational use only; no patient-level data.</p>
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="learn.html">Learn</a><a href="projects.html" aria-current="page">Projects</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="https://github.com/LaboratoireV">GitHub</a></nav>
+  </div>
+</footer>
+</body>
+</html>
