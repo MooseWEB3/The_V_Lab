@@ -348,3 +348,5 @@ p code, li code, td code { background: color-mix(in srgb, var(--ink) 7%, transpa
   .q-table tr { border-bottom: 1px solid var(--line); padding: 6px 0; }
   .q-table td { border: 0; padding: 4px 12px; }
 }
+
+.lead-title { font-family: var(--serif); font-size: 1.02rem; line-height: 1.45; color: var(--muted); margin: -4px 0 18px; max-width: 52ch; }
