@@ -436,3 +436,70 @@ p code, li code, td code { background: color-mix(in srgb, var(--ink) 7%, transpa
 .link-list { padding-left: 1.2em; }
 .link-list li { margin-bottom: 6px; }
 .refs-line { margin: 22px 0 0; color: var(--ink-soft); font-size: 0.97rem; }
+
+/* ---------- Atlas page ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ds-chip { display: inline-block; font-size: 0.78rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: var(--teal-pale); color: var(--teal-dark); text-decoration: none; }
+a.ds-chip:hover { text-decoration: underline; }
+.journey { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.journey li { padding: 16px 16px 8px 0; display: flex; flex-direction: column; gap: 8px; }
+.journey li + li { padding-left: 16px; border-left: 1px solid var(--line); }
+.journey h3 { margin: 0; font-size: 1.05rem; }
+.journey p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+.j-step { font-family: var(--serif); font-weight: 600; color: var(--teal-dark); font-variant-numeric: tabular-nums; }
+.j-cap { font-style: italic; color: var(--muted) !important; margin: 0; }
+.ds-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.ds-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
+.ds-card[hidden] { display: none; }
+.ds-card > h3 { margin: 0; font-size: 1.12rem; }
+.ds-card > p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+.ds-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ds-acr { font-family: var(--serif); font-weight: 700; font-size: 1.35rem; color: var(--teal-dark); margin-right: 4px; }
+.ds-facts { margin: 4px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; font-size: 0.88rem; }
+.ds-facts.four { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 18px 0; }
+.ds-facts dt { font-weight: 700; color: var(--muted); font-size: 0.8rem; }
+.ds-facts dd { margin: 2px 0 0; color: var(--ink); }
+.ds-card details { border-top: 1px solid var(--line); padding-top: 10px; }
+.ds-card summary { cursor: pointer; font-weight: 700; color: var(--teal-dark); font-size: 0.93rem; }
+.ds-card details h4, .dive h4 { font-family: var(--serif); font-size: 1rem; margin: 16px 0 6px; color: var(--ink); }
+.ds-card details p { margin: 0; font-size: 0.93rem; color: var(--ink-soft); }
+.ds-meta { margin: 0 0 6px !important; }
+.plain-list { margin: 0; padding-left: 1.2em; font-size: 0.93rem; color: var(--ink-soft); }
+.plain-list li + li { margin-top: 4px; }
+.concept-table { font-size: 0.86rem; }
+.concept-table td:first-child { font-weight: 600; white-space: normal !important; }
+.concept-table code, .sample-table code { background: none; padding: 0; font-size: 0.85em; }
+.ds-card .links { font-size: 0.88rem; padding-top: 2px; }
+.dive { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(20px, 3vw, 32px); }
+.dive + .dive { margin-top: 24px; }
+.dive-head { display: flex; align-items: baseline; gap: 14px; }
+.dive-head .ds-acr { font-size: 2rem; }
+.dive-head h3 { margin: 0; font-size: 1.4rem; }
+.dive-intro { color: var(--ink-soft); max-width: 78ch; }
+.trace { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 26px; counter-reset: tr; }
+.trace li { counter-increment: tr; position: relative; font-size: 0.93rem; }
+.trace li::before { content: counter(tr) ". "; font-weight: 700; color: var(--teal-dark); }
+.trace li + li::after { content: "→"; position: absolute; left: -19px; color: var(--muted); }
+.checklist.cross li::before { background: var(--ctas-2); border-radius: 50%; }
+.dive .checklist li { font-size: 0.93rem; color: var(--ink-soft); }
+.sample-table td:nth-child(2) { font-family: var(--mono); font-size: 0.85rem; }
+.ex-q { font-weight: 600; color: var(--ink) !important; }
+.ex-take { font-size: 0.9rem; color: var(--muted) !important; }
+.kit.design { grid-template-columns: 6em 1fr; font-size: 0.9rem; }
+.card h4 { margin: 0; font-family: var(--serif); font-size: 1.05rem; }
+.res-list { list-style: none; margin: 0; padding: 0; }
+.res-list li { padding: 12px 0; border-top: 1px solid var(--line); }
+.res-list a { font-weight: 700; }
+.res-list .org { color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
+.res-list p { margin: 4px 0 0; font-size: 0.93rem; color: var(--ink-soft); }
+.res-grid h3 { font-size: 1.1rem; margin: 0 0 6px; }
+.glossary { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.glossary div { padding: 12px 0; border-top: 1px solid var(--line); }
+.glossary dt { font-weight: 700; font-family: var(--serif); }
+.glossary dd { margin: 4px 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+.section-head .filter { align-self: end; }
+@media (max-width: 1100px) { .journey { grid-template-columns: repeat(3, minmax(0, 1fr)); } .journey li:nth-child(4) { padding-left: 0; border-left: 0; } .ds-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ds-facts.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .journey, .ds-grid, .glossary { grid-template-columns: 1fr; } .journey li, .journey li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); } .ds-facts.four { grid-template-columns: 1fr 1fr; } }
+.ds-card .links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-weight: 700; }
+.ds-card .links a { text-decoration: none; }
+.ds-card .links a:hover { text-decoration: underline; }
