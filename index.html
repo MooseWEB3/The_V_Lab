@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The V Lab</title>
-<meta name="description" content="The V Lab: open guides to biostatistics, epidemiology and R, synthetic Alberta health-data projects, and R tooling.">
+<meta name="description" content="The V Lab: a health data science notebook. Featured: Project 001, an end-to-end analysis of synthetic Alberta emergency and inpatient records, plus open guides to biostatistics, epidemiology and R.">
 <link rel="canonical" href="https://vthelab.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The V Lab">
-<meta property="og:description" content="The V Lab: open guides to biostatistics, epidemiology and R, synthetic Alberta health-data projects, and R tooling.">
+<meta property="og:description" content="The V Lab: a health data science notebook. Featured: Project 001, an end-to-end analysis of synthetic Alberta emergency and inpatient records, plus open guides to biostatistics, epidemiology and R.">
 <meta property="og:url" content="https://vthelab.com/">
 <meta property="og:image" content="https://vthelab.com/assets/og.png">
 <meta property="og:site_name" content="The V Lab">
@@ -17,10 +17,13 @@
 <meta property="og:image:alt" content="The V Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The V Lab">
-<meta name="twitter:description" content="The V Lab: open guides to biostatistics, epidemiology and R, synthetic Alberta health-data projects, and R tooling.">
+<meta name="twitter:description" content="The V Lab: a health data science notebook. Featured: Project 001, an end-to-end analysis of synthetic Alberta emergency and inpatient records, plus open guides to biostatistics, epidemiology and R.">
 <meta name="twitter:image" content="https://vthelab.com/assets/og.png">
-<meta name="theme-color" content="#17324d">
+<meta name="theme-color" content="#13293d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -31,107 +34,159 @@
       <span class="vlab-mark" aria-hidden="true">V</span>
       <span class="vlab-name">The V Lab</span>
     </a>
-    <nav class="nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="learn.html">Learn</a><a href="projects.html">Projects</a><a href="tools.html">Tools</a><a href="about.html">About</a></nav>
+    <nav class="nav" aria-label="Main"><a href="index.html" aria-current="page">Home</a><a href="projects.html">Projects</a><a href="learn.html">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a></nav>
   </div>
 </header>
 <main id="main">
 
-<div class="hero">
+<div class="lead">
   <div class="wrap">
-    <span class="eyebrow">The V Lab</span>
-    <h1>Health data science, learned and built in the open.</h1>
-    <p class="lede">In-depth guides to biostatistics, epidemiology and R; end-to-end projects on synthetic Alberta health data; and the tools that make the work repeatable.</p>
-    <div class="hero-actions">
-      <a class="btn btn-light" href="learn.html">Start learning</a>
-      <a class="btn btn-ghost" href="projects.html">See the projects</a>
+    <div>
+      <p class="lead-kicker"><a href="projects.html">Project 001, release 2.0</a></p>
+      <h1>Who gets admitted from the emergency department, and how long do they stay?</h1>
+      <p class="lede">An end-to-end health data science project on 90,000 synthetic Alberta-style NACRS and DAD records: building the cohorts, linking ED visits to inpatient stays, then modelling admission, length of stay and adult asthma with regression, propensity-score matching and mixed models. Each step is written up as a consulting memo.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Read the project</a>
+        <a class="btn btn-outline" href="#memos">See the ten memos</a>
+      </div>
+      <p class="fine">Every patient record is simulated. The 30 hospital names are real Alberta emergency departments used as reference labels only; no result describes how those hospitals actually perform.</p>
     </div>
-    <div class="stats" role="list">
-      <div class="stat" role="listitem"><b>22</b><span>in-depth guides</span></div>
-      <div class="stat" role="listitem"><b>5</b><span>learning tracks</span></div>
-      <div class="stat" role="listitem"><b>2</b><span>health-data projects</span></div>
-      <div class="stat" role="listitem"><b>1</b><span>R package</span></div>
-    </div>
+
+    <figure class="flow" aria-labelledby="flow-cap">
+      <div class="flow-row">
+        <div class="step">
+          <a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A01.html">A01</a>
+          <b>30,000</b>
+          <span>ED visits at 30 hospitals (NACRS-style)</span>
+          <div class="ctas" role="img" aria-label="Triage level: CTAS 1, 12.9%; CTAS 2, 23.0%; CTAS 3, 28.7%; CTAS 4, 22.9%; CTAS 5, 12.4%">
+            <div class="ctas-bar"><i class="c1" style="width:12.9%"></i><i class="c2" style="width:23.0%"></i><i class="c3" style="width:28.7%"></i><i class="c4" style="width:22.9%"></i><i class="c5" style="width:12.4%"></i></div>
+            <div class="ctas-key"><span>CTAS 1, most urgent</span><span>CTAS 5</span></div>
+          </div>
+        </div>
+        <div class="excl">24,190 not admitted: 23,585 sent home, 605 left without being seen</div>
+      </div>
+      <div class="down arrow"></div>
+      <div class="flow-row">
+        <div class="step">
+          <a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A03.html">A03</a>
+          <b>5,810</b>
+          <span>admitted to hospital (19.4%)</span>
+        </div>
+        <div class="excl">1,177 not linked: 888 with no ID match in DAD, 289 outside the 6-hour window</div>
+      </div>
+      <div class="down arrow"></div>
+      <div class="flow-row">
+        <div class="step">
+          <a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A04.html">A04</a>
+          <b>4,633</b>
+          <span>linked to a DAD inpatient stay (79.7%)</span>
+        </div>
+      </div>
+      <div class="down arrow"></div>
+      <div class="flow-row">
+        <div class="step">
+          <a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A05.html">A05</a>
+          <b>4 days</b>
+          <span>median inpatient stay (mean 4.79), modelled on ED time and CTAS</span>
+        </div>
+      </div>
+
+      <div class="branch">
+        <p class="branch-title">Adult asthma sub-study, from the same 30,000 visits</p>
+        <div class="chain">
+          <div class="step"><b>24,926</b><span>adult ED visits</span></div>
+          <div class="step"><b>8,170</b><span>main diagnosis asthma</span></div>
+          <div class="step"><a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><b>7,700</b><span>matched pairs within hospital</span></div>
+        </div>
+      </div>
+      <figcaption id="flow-cap">Cohort flow for synthetic data release 2.0 (9 October 2026). Numbers come from memos A01–A07.</figcaption>
+    </figure>
   </div>
 </div>
 
-<section>
+<section id="memos">
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>What the lab covers</h2>
-        <p>Every guide is a self-contained page with worked examples and runnable code. Most also have a Chinese edition.</p>
+        <h2>From raw extract to model, in ten memos</h2>
+        <p>The project is written the way a consulting analysis would be: one memo per step, each reading the output of the one before it.</p>
       </div>
-      <a class="more" href="learn.html">All 22 guides →</a>
+      <a class="more" href="https://github.com/LaboratoireV/Project001_HealthData">Source on GitHub</a>
     </div>
-    <div class="grid grid-3">
-      <a class="card card-link" href="learn.html#biostatistics">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
-        <h3>Biostatistics</h3>
-        <p>From descriptive statistics to causal inference: a full applied-statistics sequence for health research, each guide with runnable R code.</p>
-        <span class="go">14 guides →</span>
-      </a>
-      <a class="card card-link" href="learn.html#epidemiology">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-        <h3>Epidemiology</h3>
-        <p>A population view of health: disease frequency, study design, bias, and modern causal methods.</p>
-        <span class="go">3 guides →</span>
-      </a>
-      <a class="card card-link" href="learn.html#visualization">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></div>
-        <h3>Data Visualization</h3>
-        <p>Static, publication-ready graphics and interactive browser charts in R.</p>
-        <span class="go">2 guides →</span>
-      </a>
-      <a class="card card-link" href="learn.html#reporting">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
-        <h3>Reproducible Reporting</h3>
-        <p>Narrative, code and results in one document that rebuilds itself.</p>
-        <span class="go">1 guide →</span>
-      </a>
-      <a class="card card-link" href="learn.html#platforms">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
-        <h3>Data Platforms &amp; GIS</h3>
-        <p>Working with data where it lives: cloud warehouses and spatial analysis.</p>
-        <span class="go">2 guides →</span>
-      </a>
-      <a class="card card-link" href="tools.html">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></div>
-        <h3>R &amp; Python Tooling</h3>
-        <p>VLabR, a small R package for cleaning, summarizing and de-identifying health data — plus Python practice notes.</p>
-        <span class="go">Explore tools →</span>
-      </a>
+    <div class="phases">
+      <div class="phase">
+        <h3>Build the data</h3>
+        <p>Import, derive and profile.</p>
+        <ol class="memos">
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A00.html">A00</a><span>Import both workbooks and derive the research variables<em>Data preparation</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A01.html">A01</a><span>Profile the emergency cohort: coverage, distributions, quality checks<em>Descriptive statistics</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A02.html">A02</a><span>Profile the inpatient cohort<em>Descriptive statistics</em></span></li>
+        </ol>
+      </div>
+      <div class="phase">
+        <h3>Admission and length of stay</h3>
+        <p>The two original questions.</p>
+        <ol class="memos">
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A03.html">A03</a><span>Does time in the ED and triage level relate to admission?<em>Logistic regression</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A04.html">A04</a><span>Link admitted ED visits to inpatient stays<em>Deterministic record linkage, 6-hour window</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A05.html">A05</a><span>How do ED stay and acuity relate to inpatient length of stay?<em>Linear regression, acute-stay sensitivity</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a><span>Summary of A00–A05 on release 2.0<em>Findings memo</em></span></li>
+        </ol>
+      </div>
+      <div class="phase">
+        <h3>Adult asthma</h3>
+        <p>Causal and multilevel methods, with hospital clustering.</p>
+        <ol class="memos">
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><span>Admission risk for asthma vs. similar patients at the same hospital<em>Propensity-score matching, clustered RD/RR</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><span>Does the asthma difference vary by region?<em>Outcome regression, g-computation</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a><span>Asthma admissions across Calgary, Edmonton and other regions<em>Logistic GLMM, hospital random intercepts</em></span></li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-head"><div><h2>Featured project</h2></div><a class="more" href="projects.html">All projects →</a></div>
-    <div class="feature">
-      <div>
-        <span class="tag teal">Project 001</span>
-        <h3>Synthetic Alberta emergency &amp; inpatient data</h3>
-        <p>A consulting-style demonstration built on fully synthetic NACRS and DAD records — no real patients — with one shared release (2.0) behind every memo.</p>
-        <ul class="checklist">
-          <li>Does triage acuity (CTAS) and time to disposition predict hospitalization?</li>
-          <li>Among those admitted, what drives inpatient length of stay?</li>
-          <li>For adults with an asthma ED visit, does admission risk differ within hospitals and across the Calgary and Edmonton regions?</li>
-          <li>Ten consulting memos (A00–A09) and runnable R examples</li>
-        </ul>
-        <div class="hero-actions" style="margin-top:22px">
-          <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Open Project 001</a>
-          <a class="btn btn-outline" href="https://github.com/LaboratoireV/Project001_HealthData">Source</a>
-        </div>
-      </div>
-      <img src="assets/project001.jpg" alt="Preview of the Project 001 website" loading="lazy" width="1200" height="630">
+  <div class="wrap me">
+    <div>
+      <h2>A notebook for health data science</h2>
+      <p>I'm Miss V. The V Lab is where I learn health data science properly and then use it: each method gets a long-form guide first, and then a place in a project built on realistic Alberta administrative data.</p>
+      <p>Everything here is synthetic or public. The data designs follow the official documentation for datasets like NACRS and DAD, and every page and analysis is open on GitHub.</p>
+      <p><a href="about.html"><b>How the lab works</b></a></p>
     </div>
+    <dl class="kit">
+      <dt>Methods</dt><dd>Regression for binary and count outcomes, survival analysis, multilevel models, propensity scores, causal inference, meta-analysis</dd>
+      <dt>Health data</dt><dd>NACRS, DAD, PIN, practitioner claims, lab and vital statistics, record linkage and cohort design</dd>
+      <dt>Tools</dt><dd>R, R Markdown, renv, lme4, ggplot2, Plotly, Snowflake SQL, ArcGIS, and my own R package, VLabR</dd>
+      <dt>Languages</dt><dd>Most guides in English and Chinese</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Learning tracks</h2>
+        <p>22 guides, each a single page with worked examples and R code you can run.</p>
+      </div>
+      <a class="more" href="learn.html">Browse all guides</a>
+    </div>
+    <ul class="tracks">
+      <li><a href="learn.html#biostatistics"><h3>Biostatistics</h3><span class="n">14 guides</span><p>From foundations to survival analysis, multilevel models and causal inference.</p></a></li>
+      <li><a href="learn.html#epidemiology"><h3>Epidemiology</h3><span class="n">3 guides</span><p>Disease frequency, study designs, bias and modern causal methods.</p></a></li>
+      <li><a href="learn.html#visualization"><h3>Data visualization</h3><span class="n">2 guides</span><p>Publication-ready ggplot2 and interactive Plotly charts.</p></a></li>
+      <li><a href="learn.html#reporting"><h3>Reproducible reporting</h3><span class="n">1 guide</span><p>R Markdown documents that rebuild themselves from the data.</p></a></li>
+      <li><a href="learn.html#platforms"><h3>Data platforms and GIS</h3><span class="n">2 guides</span><p>Snowflake for data where it lives; ArcGIS for where patients are.</p></a></li>
+      <li><a href="tools.html"><h3>VLabR and Python</h3><span class="n">Tools</span><p>An R package for cleaning, summary tables and de-identification, plus Python practice.</p></a></li>
+    </ul>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="section-head"><div><h2>Recently updated</h2></div></div>
-    <ul class="activity"><li><a href="https://laboratoirev.github.io/Project001_HealthData/">Project 001 · release 2.0</a><span class="what">Shared synthetic NACRS &amp; DAD release, memos A00–A09 with asthma propensity-matching and hospital GLMM analyses</span><time datetime="2026-10-09">2026-10-09</time></li><li><a href="https://github.com/LaboratoireV/VLabR">VLabR</a><span class="what">R package for data cleaning, summary tables and de-identification</span><time datetime="2026-09-26">2026-09-26</time></li><li><a href="https://github.com/LaboratoireV/Python_Lab">Python Lab</a><span class="what">Beginner Python exercises</span><time datetime="2026-09-18">2026-09-18</time></li><li><a href="https://github.com/LaboratoireV/ArcGIS_Study">Getting Started with ArcGIS</a><span class="what">New bilingual GIS course</span><time datetime="2026-09-09">2026-09-09</time></li><li><a href="https://laboratoirev.github.io/Statistics_Study/">Biostatistics guides</a><span class="what">14 in-depth statistics guides</span><time datetime="2026-08-12">2026-08-12</time></li></ul>
+    <ul class="activity"><li><a href="https://laboratoirev.github.io/Project001_HealthData/">Project 001, release 2.0</a><span class="what">One shared synthetic NACRS and DAD release; memos A00–A09 with asthma propensity matching and hospital GLMMs</span><time datetime="2026-10-09">2026-10-09</time></li><li><a href="https://github.com/LaboratoireV/VLabR">VLabR</a><span class="what">R package for data cleaning, summary tables and de-identification</span><time datetime="2026-09-26">2026-09-26</time></li><li><a href="https://github.com/LaboratoireV/Python_Lab">Python Lab</a><span class="what">Beginner Python exercises</span><time datetime="2026-09-18">2026-09-18</time></li><li><a href="https://github.com/LaboratoireV/ArcGIS_Study">Getting started with ArcGIS</a><span class="what">New bilingual GIS course</span><time datetime="2026-09-09">2026-09-09</time></li><li><a href="https://laboratoirev.github.io/Statistics_Study/">Biostatistics guides</a><span class="what">14 in-depth statistics guides</span><time datetime="2026-08-12">2026-08-12</time></li></ul>
   </div>
 </section>
 
@@ -140,9 +195,9 @@
   <div class="wrap">
     <div>
       <a class="vlab-brand" href="index.html" aria-label="The V Lab home"><span class="vlab-mark" aria-hidden="true">V</span><span class="vlab-name">The V Lab</span></a>
-      <p style="margin:12px 0 0;max-width:46ch">Open learning guides, synthetic-data projects and R tooling for health data science. Educational use only; no patient-level data.</p>
+      <p style="margin:12px 0 0;max-width:46ch">A health data science notebook: projects on synthetic Alberta health data, open guides and R tooling. Educational use only; no patient-level data.</p>
     </div>
-    <nav aria-label="Footer"><a href="index.html" aria-current="page">Home</a><a href="learn.html">Learn</a><a href="projects.html">Projects</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="https://github.com/LaboratoireV">GitHub</a></nav>
+    <nav aria-label="Footer"><a href="index.html" aria-current="page">Home</a><a href="projects.html">Projects</a><a href="learn.html">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="https://github.com/LaboratoireV">GitHub</a></nav>
   </div>
 </footer>
 </body>
