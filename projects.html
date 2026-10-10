@@ -42,33 +42,101 @@
 <div class="hero compact">
   <div class="wrap">
         <h1>Projects</h1>
-    <p class="lede">Applied work on Alberta health data — designed from official documentation and built entirely on synthetic or public information.</p>
+    <p class="lede">Applied health data science on Alberta-style administrative data, designed from official documentation and built entirely on simulated or public information.</p>
   </div>
 </div>
-<section>
+<section id="project-001">
   <div class="wrap">
     <div class="feature">
       <div>
-        <span class="tag teal">Project 001 · Synthetic health data consulting</span>
-        <h3>Emergency visits, hospitalization and length of stay</h3>
-        <p>Project 001 generates synthetic NACRS-style emergency records (30,000 visits, 39 variables) and DAD-style inpatient records (60,000 stays, 60 variables) in one shared release (2.0) used by all ten memos, so linked questions can be studied without real patients. The 30 hospital names are real Alberta ED reference labels only; no result describes their actual performance. It is a fictional consulting demonstration — not a real contract or patient population.</p>
-        <ul class="checklist">
-          <li><b>Question 1:</b> do CTAS level and pre-disposition time affect whether an emergency patient is hospitalized?</li>
-          <li><b>Question 2:</b> among admitted patients, how do acuity and emergency stay relate to inpatient length of stay?</li>
-          <li><b>Question 3:</b> for adults whose ED visit is for asthma, how does admission risk compare with similar patients at the same hospital, and does it differ across the Calgary, Edmonton and other regions?</li>
-          <li>Reproducible R workflow with <code>renv</code>, a variable dictionary and example reports</li>
-        </ul>
+        <span class="tag teal">Project 001, release 2.0</span>
+        <h3>From the emergency department to the ward</h3>
+        <p>Project 001 follows patients along one care pathway using a single, unified set of simulated Alberta administrative health data. It asks which factors are linked to being admitted and to how long patients then stay, and goes on to study admission risk and regional differences for adults who come to the emergency department with asthma.</p>
+        <p>It tackles two kinds of problem at once: health services research questions, and the methods question of how to answer them credibly and reproducibly. Memos A00–A09 now connect data preparation, record linkage, statistical analysis and simulation checks into one complete workflow.</p>
         <div class="hero-actions" style="margin-top:22px">
-          <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Open project site</a>
-          <a class="btn btn-outline" href="https://github.com/LaboratoireV/Project001_HealthData">Source</a>
+          <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Open the project site</a>
+          <a class="btn btn-outline" href="https://github.com/LaboratoireV/Project001_HealthData">Source on GitHub</a>
         </div>
       </div>
-      <img src="assets/project001.jpg" alt="Preview of the Project 001 website" loading="lazy" width="1200" height="630">
+      <img src="assets/project001.jpg" alt="Project 001 cover: synthetic health data consulting" loading="lazy" width="1200" height="630">
     </div>
-    <div class="card" style="margin-top:18px">
-      <h3>Consulting memos</h3>
-      <p>The analysis is written up as a sequence of memos, from scoping to findings.</p>
-      <div class="links"><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A00.html">A00</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A01.html">A01</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A02.html">A02</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A03.html">A03</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A04.html">A04</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A05.html">A05</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a></div>
+
+    <div class="p-block">
+      <h2>One patient pathway, two data sources</h2>
+      <ol class="pathway" aria-label="Patient pathway">
+        <li><b>Emergency visit</b><span>Diagnosis, triage acuity, timing and hospital</span></li>
+        <li><b>Admitted or not</b><span>The disposition at the end of the ED visit</span></li>
+        <li><b>Length of stay</b><span>How long the inpatient stay lasts</span></li>
+      </ol>
+      <dl class="sources">
+        <div><dt>NACRS</dt><dd>One record per emergency visit: main diagnosis, triage level (CTAS), visit times, hospital and whether the patient was admitted. <b>30,000 ED visits.</b></dd></div>
+        <div><dt>DAD</dt><dd>One record per inpatient stay: admission, discharge and length of stay. <b>60,000 inpatient records.</b></dd></div>
+      </dl>
+      <p class="p-note">Some records describe the same patient moving from the ED into hospital, so the 90,000 rows across both files are not 90,000 independent patients. Every memo now draws on these same two sources.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>Four research questions</h2>
+      <div class="table-scroll">
+        <table class="fn-table q-table">
+          <thead><tr><th scope="col">Question</th><th scope="col">Why it matters</th><th scope="col">Methods and memos</th></tr></thead>
+          <tbody>
+            <tr><td>How are time in the ED and triage acuity related to the chance of admission?</td><td>Understanding admission need among ED patients, and how time-based measures should be read</td><td><b>A03</b> logistic regression, built on data preparation and profiling in <b>A00–A02</b></td></tr>
+            <tr><td>Among admitted patients, is time spent in the ED related to how long they then stay in hospital?</td><td>Treats the ED visit and the inpatient stay as one continuous episode of care</td><td><b>A04</b> links NACRS to DAD, <b>A05</b> linear regression, <b>A06</b> brings the findings together</td></tr>
+            <tr><td>Are adults who come to the ED with asthma more likely to be admitted than patients with other reasons for their visit?</td><td>Separates differences in patient background from admission risk associated with asthma</td><td><b>A07</b> propensity-score matching, <b>A08</b> outcome models and risk estimates on the matched pairs</td></tr>
+            <tr><td>Does the asthma-related difference in admission vary between Calgary, Edmonton and other regions?</td><td>Asks whether region matters beyond patient mix and hospital differences</td><td><b>A09</b> logistic GLMM that accounts for patients clustering within hospitals</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="p-note">The first two questions are the project's original focus. The link between ED time and admission cannot be read as "the longer you wait, the more likely you are to be admitted": how complex the case is, the tests it needs and bed availability all shape that time. Waiting after the decision to admit, in particular, cannot be a cause of a decision that came before it. A03's main analysis therefore uses ED time up to the disposition decision, and both A03 and A05 are associational analyses.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>Adult asthma: building a fairer comparison</h2>
+      <div class="two-col">
+        <div class="prose">
+          <p>The asthma study moves the project from describing associations to designing a fair comparison. From NACRS it selects visits by patients aged 18 or over whose main diagnosis for that visit is in the asthma J45 family. The study population is people who came to the ED <em>because of</em> asthma this time, not everyone with a history of asthma and not everyone presenting with shortness of breath. The unified data hold 24,926 adult ED visits, of which 8,170 have asthma as the main diagnosis.</p>
+          <p>A straight comparison of admission rates would be unfair, because the asthma group may differ in age, smoking, obesity, medical history and past ED use. A07 therefore uses propensity scores to find non-asthma patients with similar backgrounds <em>at the same hospital</em>, producing 7,700 matched pairs. A08 then fits outcome models on those fixed pairs to estimate adjusted admission probabilities, the risk difference and the risk ratio.</p>
+        </div>
+        <div>
+          <div class="table-scroll">
+            <table class="fn-table result-table">
+              <caption>A08 results on simulated data</caption>
+              <tbody>
+                <tr><th scope="row">Adjusted admission probability, asthma</th><td>31.8%</td></tr>
+                <tr><th scope="row">Adjusted admission probability, matched controls</th><td>22.2%</td></tr>
+                <tr><th scope="row">Risk difference</th><td>+9.54 points<br><span>95% CI 8.47 to 10.61</span></td></tr>
+                <tr><th scope="row">Risk ratio</th><td>1.43<br><span>95% CI 1.37 to 1.49</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="p-note">These estimates apply to the asthma visits that were successfully matched. Matching improves comparability on measured background factors, but it does not remove all confounding, and matching alone cannot prove a causal effect in the real world.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-block">
+      <h2>Two regional questions</h2>
+      <div class="grid grid-2">
+        <div class="card"><h3>Among asthma patients only</h3><p>When age, medical history and severity on arrival are comparable, does the probability of admission differ across the three regions?</p></div>
+        <div class="card"><h3>Asthma versus other visits</h3><p>Does the extra admission risk associated with asthma differ by region? This is the asthma × region interaction in the model. The two questions are related but mean different things.</p></div>
+      </div>
+      <p class="p-note" style="margin-top:16px">Calgary and Edmonton include hospitals in surrounding towns, and patients are grouped by the region of the hospital they attended. Because the outcome is admitted or not, A09 uses a logistic GLMM: region enters as a fixed effect, and a random intercept for hospital captures how patients at the same hospital resemble each other. In the current simulation, adult asthma patients in Edmonton have a higher adjusted admission probability than those in other regions. Calgary's point estimate is lower, but the interval for its difference from other regions includes zero, so the direction is not yet clear. A higher or lower admission rate is not, on its own, a measure of better or worse care.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>Can the methods recover the truth?</h2>
+      <p class="prose">Because the patient data are simulated, the true effects built into the data are known. The project can therefore generate many datasets with and without an effect and check whether matching, regression and mixed models are biased and whether their confidence intervals can be trusted. That says far more about how a method performs than running one model once and reading off a p-value.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>Where the project stands</h2>
+      <p class="prose">The unified data, memos A00–A09, the main models and the simulation checks are all complete. What the project offers is a reproducible worked example of ED-to-inpatient research, along with a test of the methods used. Whether these effects exist among real Alberta patients is a question only research on real data can answer.</p>
+      <p class="note" style="margin-top:14px">The names of the 30 hospitals come from real public sources, but the patients, admission outcomes and hospital and regional effects are all simulated. None of these results can be used to judge any real hospital.</p>
+      <div class="card" style="margin-top:18px">
+        <h3>Read the memos</h3>
+        <div class="links"><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A00.html">A00</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A01.html">A01</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A02.html">A02</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A03.html">A03</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A04.html">A04</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A05.html">A05</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a></div>
+      </div>
     </div>
   </div>
 </section>

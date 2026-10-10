@@ -44,9 +44,9 @@
     <div>
       <p class="lead-kicker"><a href="projects.html">Project 001, release 2.0</a></p>
       <h1>Who gets admitted from the emergency department, and how long do they stay?</h1>
-      <p class="lede">An end-to-end health data science project on 90,000 synthetic Alberta-style NACRS and DAD records: building the cohorts, linking ED visits to inpatient stays, then modelling admission, length of stay and adult asthma with regression, propensity-score matching and mixed models. Each step is written up as a consulting memo.</p>
+      <p class="lede">An end-to-end health data science project on one unified set of simulated Alberta administrative data. It follows patients from the emergency department into hospital, asks what is linked to admission and length of stay, then builds a fairer comparison for adults with asthma using propensity-score matching and mixed models. Because the data are simulated, it also checks whether those methods recover the effects built into the data.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Read the project</a>
+        <a class="btn btn-primary" href="projects.html#project-001">Read the project overview</a>
         <a class="btn btn-outline" href="#memos">See the ten memos</a>
       </div>
       <p class="fine">Every patient record is simulated. The 30 hospital names are real Alberta emergency departments used as reference labels only; no result describes how those hospitals actually perform.</p>
@@ -138,8 +138,8 @@
         <p>Causal and multilevel methods, with hospital clustering.</p>
         <ol class="memos">
           <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><span>Admission risk for asthma vs. similar patients at the same hospital<em>Propensity-score matching, clustered RD/RR</em></span></li>
-          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><span>Does the asthma difference vary by region?<em>Outcome regression, g-computation</em></span></li>
-          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a><span>Asthma admissions across Calgary, Edmonton and other regions<em>Logistic GLMM, hospital random intercepts</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><span>Adjusted admission risk, risk difference and risk ratio on the matched pairs<em>Outcome regression, g-computation</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a><span>Do asthma admissions, and the asthma effect, differ across Calgary, Edmonton and other regions?<em>Logistic GLMM, hospital random intercepts</em></span></li>
         </ol>
       </div>
     </div>
