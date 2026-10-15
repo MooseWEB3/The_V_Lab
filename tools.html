@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tools | The V Lab</title>
-<meta name="description" content="VLabR, an R package for health-data cleaning and de-identification, and Python practice notes.">
+<meta name="description" content="VLabR 0.0.0.9043: R helpers for health-data cleaning, summaries, dates, de-identification and Alberta hospital travel, plus Python practice notes.">
 <link rel="canonical" href="https://vthelab.com/tools.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tools | The V Lab">
-<meta property="og:description" content="VLabR, an R package for health-data cleaning and de-identification, and Python practice notes.">
+<meta property="og:description" content="VLabR 0.0.0.9043: R helpers for health-data cleaning, summaries, dates, de-identification and Alberta hospital travel, plus Python practice notes.">
 <meta property="og:url" content="https://vthelab.com/tools.html">
 <meta property="og:image" content="https://vthelab.com/assets/og.png">
 <meta property="og:site_name" content="The V Lab">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="The V Lab">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tools | The V Lab">
-<meta name="twitter:description" content="VLabR, an R package for health-data cleaning and de-identification, and Python practice notes.">
+<meta name="twitter:description" content="VLabR 0.0.0.9043: R helpers for health-data cleaning, summaries, dates, de-identification and Alberta hospital travel, plus Python practice notes.">
 <meta name="twitter:image" content="https://vthelab.com/assets/og.png">
 <meta name="theme-color" content="#13293d">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -51,7 +51,7 @@
       <div class="prose">
         <span class="tag teal">R package</span>
         <h2 style="margin-top:10px">VLabR</h2>
-        <p>A lightweight R package for common data-cleaning and summary-table tasks in health data work: tidy column names, duplicate and uniqueness checks, one-row summaries, covariate balance, stable de-identified IDs and personal-name masking. Name masking can use Python and spaCy when available, with a pure-R fallback for locked-down work computers. Requires R 4.1.0 or later.</p>
+        <p>VLabR 0.0.0.9043 is a lightweight R package for everyday health-data work: tidy column names, file import, one-row summaries, dates, stable de-identified IDs, personal-name masking, and travel to Alberta hospitals. Name masking can use Python and spaCy when available, with a pure-R fallback for locked-down work computers. Requires R 4.4.0 or later.</p>
         <p><a href="https://github.com/LaboratoireV/VLabR"><b>View VLabR on GitHub →</b></a></p>
       </div>
       <div>
@@ -67,7 +67,43 @@ vlab_load_vlabr_packages()</code></pre>
     <div class="table-scroll">
       <table class="fn-table">
         <thead><tr><th scope="col">Function</th><th scope="col">What it does</th></tr></thead>
-        <tbody><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Data cleaning</th></tr><tr><td><code>vlab_fix_colname()</code></td><td>Clean column names: strip special characters, replace spaces.</td></tr><tr><td><code>vlab_boost_data()</code></td><td>Detect and convert date-like columns automatically.</td></tr><tr><td><code>vlab_date_conversion()</code></td><td>Convert input to R Date or date-time values.</td></tr><tr><td><code>vlab_quote_rm()</code></td><td>Remove stray quotes from character and factor columns.</td></tr><tr><td><code>vlab_get_duplicates()</code></td><td>Return duplicate rows by one or more keys.</td></tr><tr><td><code>vlab_check_unique()</code></td><td>Check whether a column is unique.</td></tr><tr><td><code>vlab_data_type()</code></td><td>Classify columns by analysis type.</td></tr><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Summary tables</th></tr><tr><td><code>vlab_1_cat()</code></td><td>One-row n (%) table for a categorical variable.</td></tr><tr><td><code>vlab_1_cont()</code></td><td>One-line summary for a continuous variable.</td></tr><tr><td><code>vlab_cross_table()</code></td><td>Two-variable cross table.</td></tr><tr><td><code>vlab_count_unique_categories()</code></td><td>Count unique non-missing categories.</td></tr><tr><td><code>vlab_compare_balance()</code></td><td>Compare covariate balance between two data frames.</td></tr><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">De-identification</th></tr><tr><td><code>vlab_SID_creator()</code></td><td>Stable de-identified study ID from name, date of birth and gender.</td></tr><tr><td><code>mask_person_names()</code></td><td>Detect and mask personal names in free text (spaCy, with a pure-R fallback).</td></tr><tr><td><code>vlab_mask_PHN()</code></td><td>Mask Alberta Personal Health Numbers near a PHN label.</td></tr><tr><td><code>vlab_mask()</code></td><td>Mask vector values from the front or back.</td></tr><tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Geography &amp; reference data</th></tr><tr><td><code>vlab_travel()</code></td><td>Road travel distance and time for origin–destination pairs via OSRM.</td></tr><tr><td><code>vlab_google_travel()</code></td><td>The same using Google routing.</td></tr><tr><td><code>Alberta reference sets</code></td><td>Municipalities, health facilities, schools and Health Canada drug products.</td></tr></tbody>
+        <tbody>
+          <tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Data cleaning and files</th></tr>
+          <tr><td><code>vlab_fix_colname()</code></td><td>Clean column names: strip selected special characters and replace spaces.</td></tr>
+          <tr><td><code>vlab_quote_rm()</code></td><td>Remove stray quotes from character and factor columns.</td></tr>
+          <tr><td><code>vlab_get_duplicates()</code></td><td>Return duplicate rows by one or more keys.</td></tr>
+          <tr><td><code>vlab_check_unique()</code></td><td>Check whether a column is unique.</td></tr>
+          <tr><td><code>vlab_data_type()</code></td><td>Classify columns as continuous, categorical, date or other.</td></tr>
+          <tr><td><code>vlab_similarscore()</code></td><td>Similarity score from 0 to 1 for strings or numbers, allowing common typos.</td></tr>
+          <tr><td><code>vlab_read_csv()</code>, <code>vlab_read_xlsx()</code>, <code>vlab_read_rds()</code></td><td>Import one file, or every file of that type in a directory.</td></tr>
+          <tr><td><code>vlab_SRds()</code>, <code>vlab_LRds()</code></td><td>Save an R object to RDS, and restore it.</td></tr>
+          <tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Dates</th></tr>
+          <tr><td><code>vlab_todate()</code>, <code>vlab_todatetime()</code></td><td>Convert common date and date-time inputs, including two-digit years.</td></tr>
+          <tr><td><code>vlab_today()</code></td><td>Today's date in underscore and compact formats.</td></tr>
+          <tr><td><code>vlab_boost_data()</code></td><td>Detect and convert date-like columns in a data frame.</td></tr>
+          <tr><td><code>vlab_withintime()</code></td><td>1/0 flag for whether two date-times fall within a chosen interval.</td></tr>
+          <tr><td><code>vlab_second2format()</code></td><td>Format seconds as HH:MM:SS, with hours past 24.</td></tr>
+          <tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Summary tables</th></tr>
+          <tr><td><code>vlab_1_cat()</code></td><td>One-row n (%) table for a categorical variable.</td></tr>
+          <tr><td><code>vlab_1_cont()</code></td><td>One-line summary for a continuous variable.</td></tr>
+          <tr><td><code>vlab_cross_table()</code></td><td>Two-variable cross table with counts and percentages.</td></tr>
+          <tr><td><code>vlab_count_unique_categories()</code></td><td>Count unique non-missing categories.</td></tr>
+          <tr><td><code>vlab_compare_balance()</code></td><td>Compare covariate balance between two data frames.</td></tr>
+          <tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">De-identification</th></tr>
+          <tr><td><code>vlab_SID_creator()</code></td><td>Stable de-identified study ID from name, date of birth and gender.</td></tr>
+          <tr><td><code>vlab_setup_name_masking()</code></td><td>Prepare spaCy when available, or the pure-R fallback.</td></tr>
+          <tr><td><code>vlab_mask_person_names()</code></td><td>Replace detected personal names in free text. The older name <code>mask_person_names()</code> still works.</td></tr>
+          <tr><td><code>vlab_detect_person_names()</code>, <code>vlab_name_flag()</code></td><td>Audit detected names, or return a 1/0 flag for each text value.</td></tr>
+          <tr><td><code>vlab_mask_person_names2()</code>, <code>vlab_name_flag2()</code></td><td>Mask or flag only names that match row-aligned known-name columns.</td></tr>
+          <tr><td><code>vlab_mask_PHN()</code>, <code>vlab_mask_PHN_flag()</code></td><td>Mask a nine-digit Personal Health Number near a PHN label, or flag that one is present.</td></tr>
+          <tr><td><code>vlab_mask()</code></td><td>Mask vector values from the front or back.</td></tr>
+          <tr><th colspan="2" style="padding-top:18px;color:var(--teal-dark)">Alberta hospitals and travel</th></tr>
+          <tr><td><code>alberta_hospitals</code></td><td>Offline list of 112 Alberta facilities, with addresses and coordinates. Checked 12 October 2026; 94 have a regular 24-hour emergency department.</td></tr>
+          <tr><td><code>vlab_nearest_hospitals()</code></td><td>Add the three nearest hospitals by road distance, plus routes to Foothills Medical Centre and University of Alberta Hospital.</td></tr>
+          <tr><td><code>vlab_travel()</code></td><td>Experimental: road distance and time for origin–destination pairs via OSRM.</td></tr>
+          <tr><td><code>vlab_google_travel()</code></td><td>In development: the same idea with the Google Routes API. Not for production use yet.</td></tr>
+          <tr><td>Other reference sets</td><td>Municipalities, the broader health-facility list, schools and Health Canada drug products.</td></tr>
+        </tbody>
       </table>
     </div>
   </div>
