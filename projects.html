@@ -51,8 +51,8 @@
       <div>
         <span class="tag teal">Project 001: ED-to-Inpatient Pathways</span>
         <h3>From Emergency Department to Inpatient Care: Admission, Length of Stay and Asthma-Related Risk in Simulated Alberta Administrative Data</h3>
-        <p>Project 001 follows patients along one care pathway using a single, unified set of simulated Alberta administrative health data. It asks which factors are linked to being admitted and to how long patients then stay, and goes on to study admission risk and regional differences for adults who come to the emergency department with asthma.</p>
-        <p>It tackles two kinds of problem at once: health services research questions, and the methods question of how to answer them credibly and reproducibly. Memos A00–A09 now connect data preparation, record linkage, statistical analysis and simulation checks into one complete workflow.</p>
+        <p>Project 001 follows patients along one care pathway using a single shared synthetic dataset of Alberta-style NACRS and DAD records. It asks which factors are linked to being admitted and to how long patients then stay, and goes on to study admission risk and regional differences for adults who come to the emergency department with asthma.</p>
+        <p>It tackles two kinds of problem at once: health services research questions, and the methods question of how to answer them credibly and reproducibly. Memos A00–A09 connect data preparation, record linkage, statistical analysis and simulation checks into one complete workflow, and A09 summarizes the whole project.</p>
         <div class="hero-actions" style="margin-top:22px">
           <a class="btn btn-primary" href="https://laboratoirev.github.io/Project001_HealthData/">Open the project site</a>
           <a class="btn btn-outline" href="https://github.com/LaboratoireV/Project001_HealthData">Source on GitHub</a>
@@ -72,7 +72,7 @@
         <div><dt>NACRS</dt><dd>One record per emergency visit: main diagnosis, triage level (CTAS), visit times, hospital and whether the patient was admitted. <b>30,000 ED visits, 50 analytic variables.</b></dd></div>
         <div><dt>DAD</dt><dd>One record per inpatient stay: admission, discharge and length of stay. <b>60,000 inpatient records, 64 analytic variables.</b></dd></div>
       </dl>
-      <p class="p-note">Some records describe the same patient moving from the ED into hospital, so the 90,000 rows across both files are not 90,000 independent patients. Every memo now draws on these same two sources.</p>
+      <p class="p-note">Each of the 30,000 ED visits is a different patient. The 5,810 admitted visits each continue as one DAD abstract at the same hospital, and the other 54,190 DAD abstracts are inpatients from outside the ED extract, so the 90,000 rows are not 90,000 independent patients. Every memo draws on these two sources.</p>
     </div>
 
     <div class="p-block">
@@ -81,8 +81,8 @@
         <table class="fn-table q-table">
           <thead><tr><th scope="col">Question</th><th scope="col">Why it matters</th><th scope="col">Methods and memos</th></tr></thead>
           <tbody>
-            <tr><td>How are time in the ED and triage acuity related to the chance of admission?</td><td>Understanding admission need among ED patients, and how time-based measures should be read</td><td><b>A03</b> logistic regression, built on data preparation and profiling in <b>A00–A02</b></td></tr>
-            <tr><td>Among admitted patients, is time spent in the ED related to how long they then stay in hospital?</td><td>Treats the ED visit and the inpatient stay as one continuous episode of care</td><td><b>A04</b> links NACRS to DAD, <b>A05</b> linear regression on the linked stays</td></tr>
+            <tr><td>How are ED time before the disposition decision and triage acuity related to the chance of admission?</td><td>Understanding admission need among ED patients, and how time-based measures should be read</td><td><b>A03</b> logistic regression, built on data preparation and profiling in <b>A00–A02</b></td></tr>
+            <tr><td>Among admitted visits that link to an inpatient abstract, is time spent in the ED related to how long patients then stay in hospital?</td><td>Treats the ED visit and the inpatient stay as one continuous episode of care</td><td><b>A04</b> links NACRS to DAD, <b>A05</b> linear regression on the linked stays</td></tr>
             <tr><td>Are adults who come to the ED with asthma more likely to be admitted than patients with other reasons for their visit?</td><td>Separates differences in patient background from admission risk associated with asthma</td><td><b>A06</b> within-hospital propensity-score matching, <b>A07</b> outcome regression on those fixed pairs</td></tr>
             <tr><td>Does asthma admission, and the asthma gap, differ between Calgary, Edmonton and other regions?</td><td>Asks whether region matters beyond patient mix and hospital differences</td><td><b>A08</b> logistic GLMM with a hospital random intercept, on all adult visits</td></tr>
           </tbody>
@@ -105,7 +105,7 @@
       <h2>Adult asthma: building a fairer comparison</h2>
       <div class="two-col">
         <div class="prose">
-          <p>The asthma study moves the project from describing associations to designing a fair comparison. From NACRS it selects visits by patients aged 18 or over whose main diagnosis for that visit is in the asthma J45 family. The study population is people who came to the ED <em>because of</em> asthma this time, not everyone with a history of asthma and not everyone presenting with shortness of breath. The unified data hold 24,926 adult ED visits, of which 8,170 have asthma as the main diagnosis.</p>
+          <p>The asthma study moves the project from describing associations to designing a fair comparison. From NACRS it selects visits by patients aged 18 or over whose main diagnosis for that visit is in the asthma J45 family. The study population is people who came to the ED <em>because of</em> asthma this time, not everyone with a history of asthma and not everyone presenting with shortness of breath. The shared data hold 24,926 adult ED visits, of which 8,170 have asthma as the main diagnosis.</p>
           <p>A straight comparison of admission rates would be unfair, because the asthma group may differ in age, smoking, obesity, medical history and past ED use. A06 therefore uses propensity scores to find non-asthma patients with similar backgrounds <em>at the same hospital</em>, producing 7,700 matched pairs. After matching, admission is 31.8% in the asthma group and 21.8% in the controls: a risk difference of 10.00 points (95% CI 7.59 to 12.41). A07 keeps those same pairs and standardizes predicted risks with a logistic outcome model.</p>
         </div>
         <div>
@@ -131,7 +131,7 @@
         <div class="card"><h3>Among asthma patients only</h3><p>When age, medical history and severity on arrival are comparable, does the probability of admission differ across the three regions?</p></div>
         <div class="card"><h3>Asthma versus other visits</h3><p>Does the extra admission risk associated with asthma differ by region? This is the asthma × region interaction in the model. The two questions are related but mean different things.</p></div>
       </div>
-      <p class="p-note" style="margin-top:16px">Calgary and Edmonton include hospitals in surrounding towns, and patients are grouped by the region of the hospital they attended. A08 fits this on all 24,926 adult visits, not the matched pairs: a logistic GLMM with region as a fixed effect and a random intercept for hospital. In the current simulation, adult asthma patients in Edmonton have a higher standardized admission probability than those in other regions (+7.23 points, 95% CI 2.16 to 12.99). Calgary's estimate is lower (−5.72 points, 95% CI −10.53 to 0.25), but that interval includes zero, so the direction is not established. The gap between asthma and other visits does differ clearly by region (joint test χ² = 78.0 on 2 degrees of freedom, p &lt; 0.001). A higher or lower admission rate is not, on its own, a measure of better or worse care.</p>
+      <p class="p-note" style="margin-top:16px">The 30 hospitals are split evenly across three study regions. Calgary and Edmonton include hospitals in surrounding towns, and Other is made up of selected hospitals from the Central, North and South zones. Patients are grouped by the region of the hospital they attended, not where they live. A08 fits this on all 24,926 adult visits, not the matched pairs: a logistic GLMM with region as a fixed effect and a random intercept for hospital. In the simulation, adult asthma patients in Edmonton have a higher standardized admission probability than those in other regions (+7.23 points, 95% CI 2.16 to 12.99). Calgary's estimate is lower (−5.72 points, 95% CI −10.53 to 0.25), but that interval includes zero, so the direction is not established. The gap between asthma and other visits does differ clearly by region (joint test χ² = 78.0 on 2 degrees of freedom, p &lt; 0.001). A higher or lower admission rate is not, on its own, a measure of better or worse care.</p>
     </div>
 
     <div class="p-block">
@@ -147,7 +147,7 @@
 
     <div class="p-block">
       <h2>Where the project stands</h2>
-      <p class="prose">The unified data, memos A00–A09, the main models and the simulation checks are all complete. A09 is the project summary: it restates the design and collects the results from A00 through A08. What the project offers is a reproducible worked example of ED-to-inpatient research, along with a test of the methods used. Whether these effects exist among real Alberta patients is a question only research on real data can answer.</p>
+      <p class="prose">The shared data, memos A00–A09, the main models and the simulation checks are all complete. A09 is the project summary: it restates the design and collects the results from A00 through A08. What the project offers is a reproducible worked example of ED-to-inpatient research, along with a test of the methods used. Whether these effects exist among real Alberta patients is a question only research on real data can answer.</p>
       <p class="note" style="margin-top:14px">The names of the 30 hospitals come from real public sources, but the patients, admission outcomes and hospital and regional effects are all simulated. None of these results can be used to judge any real hospital.</p>
       <div class="card" style="margin-top:18px">
         <h3>Read the memos</h3>
@@ -160,9 +160,9 @@
   <div class="wrap">
     <div class="feature">
       <div>
-        <span class="tag">Reference · Interactive site</span>
+        <span class="tag">Reference guide</span>
         <h3>Alberta Health Data Atlas</h3>
-        <p>An interactive learning atlas of nine commonly used Alberta administrative health datasets and clinical information systems. It is the reference Project 001 was designed from.</p>
+        <p>A learning guide to nine commonly used Alberta administrative health datasets and clinical information systems. It is the reference Project 001 was designed from.</p>
         <ul class="checklist">
           <li>DAD, NACRS, Practitioner Claims, Lab, PIN, Vital Statistics, Registry, Sunrise Clinical Manager, Connect Care</li>
           <li>Deep dives on DAD, NACRS and PIN, with field maps and fictional example records</li>
