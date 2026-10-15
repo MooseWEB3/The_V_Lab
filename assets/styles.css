@@ -503,3 +503,10 @@ a.ds-chip:hover { text-decoration: underline; }
 .ds-card .links { display: flex; flex-wrap: wrap; gap: 6px 16px; font-weight: 700; }
 .ds-card .links a { text-decoration: none; }
 .ds-card .links a:hover { text-decoration: underline; }
+.memo-summary { display: grid; grid-template-columns: 3.2em 1fr; gap: 8px; margin-top: 18px; padding: 14px 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--line); }
+.memo-summary a.id { font-weight: 700; text-decoration: none; font-size: 1.05rem; }
+.memo-summary a.id:hover { text-decoration: underline; }
+.memo-summary span { color: var(--ink-soft); }
+.memo-summary em { display: block; font-style: normal; font-size: 0.84rem; color: var(--muted); margin-top: 2px; }
+.ds-facts.checks { margin-top: 16px; }
+.ds-facts.checks dd { font-size: 0.93rem; }

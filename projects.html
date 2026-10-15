@@ -92,6 +92,16 @@
     </div>
 
     <div class="p-block">
+      <h2>What the original questions found</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>Admission (A03)</h3><p>Triage level dominates. Compared with CTAS 1, the adjusted odds of admission fall at every level, to an odds ratio of 0.056 at CTAS 5. Time before the disposition decision has only a small adjusted association: OR 1.024 per 60 minutes (95% CI 1.003 to 1.045).</p></div>
+        <div class="card"><h3>Linkage (A04)</h3><p>4,633 of 5,810 admitted visits (79.7%) link to exactly one DAD abstract under the rule "same PHN, admitted within 6 hours of ED discharge". Every unlinked visit traces to a defect built into the simulation: 888 missing or mistyped identifiers and 289 late admissions.</p></div>
+        <div class="card"><h3>Length of stay (A05)</h3><p>On its own, a longer ED stay looks linked to a longer inpatient stay (+0.147 days per 60 minutes), but the association disappears once CTAS is included: −0.011 days per 60 minutes (95% CI −0.056 to 0.034). Stays after a CTAS 5 visit are 2.78 days shorter than after CTAS 1.</p></div>
+      </div>
+      <p class="p-note" style="margin-top:16px">Linked inpatient stays average 4.79 days (median 4). Acute stay, which excludes alternate-level-of-care days, gives the same picture. These are associations in simulated data, not causal effects.</p>
+    </div>
+
+    <div class="p-block">
       <h2>Adult asthma: building a fairer comparison</h2>
       <div class="two-col">
         <div class="prose">
@@ -121,12 +131,18 @@
         <div class="card"><h3>Among asthma patients only</h3><p>When age, medical history and severity on arrival are comparable, does the probability of admission differ across the three regions?</p></div>
         <div class="card"><h3>Asthma versus other visits</h3><p>Does the extra admission risk associated with asthma differ by region? This is the asthma × region interaction in the model. The two questions are related but mean different things.</p></div>
       </div>
-      <p class="p-note" style="margin-top:16px">Calgary and Edmonton include hospitals in surrounding towns, and patients are grouped by the region of the hospital they attended. A08 fits this on all 24,926 adult visits, not the matched pairs: a logistic GLMM with region as a fixed effect and a random intercept for hospital. In the current simulation, adult asthma patients in Edmonton have a higher standardized admission probability than those in other regions (+7.23 points, 95% CI 2.16 to 12.99). Calgary's estimate is lower (−5.72 points), but that interval includes zero, so the direction is not established. A higher or lower admission rate is not, on its own, a measure of better or worse care.</p>
+      <p class="p-note" style="margin-top:16px">Calgary and Edmonton include hospitals in surrounding towns, and patients are grouped by the region of the hospital they attended. A08 fits this on all 24,926 adult visits, not the matched pairs: a logistic GLMM with region as a fixed effect and a random intercept for hospital. In the current simulation, adult asthma patients in Edmonton have a higher standardized admission probability than those in other regions (+7.23 points, 95% CI 2.16 to 12.99). Calgary's estimate is lower (−5.72 points, 95% CI −10.53 to 0.25), but that interval includes zero, so the direction is not established. The gap between asthma and other visits does differ clearly by region (joint test χ² = 78.0 on 2 degrees of freedom, p &lt; 0.001). A higher or lower admission rate is not, on its own, a measure of better or worse care.</p>
     </div>
 
     <div class="p-block">
       <h2>Can the methods recover the truth?</h2>
       <p class="prose">Because the patient data are simulated, the true effects built into the data are known. The project can therefore generate many datasets with and without an effect and check whether matching, regression and mixed models are biased and whether their confidence intervals can be trusted. That says far more about how a method performs than running one model once and reading off a p-value.</p>
+      <dl class="ds-facts four checks">
+        <div><dt>Bias</dt><dd>At most 0.61 percentage points for the asthma estimators in A06 and A07</dd></div>
+        <div><dt>Interval coverage</dt><dd>92%–98% across A06–A08</dd></div>
+        <div><dt>False positives</dt><dd>3%–4% when there is no true effect</dd></div>
+        <div><dt>Main estimates</dt><dd>Both A06 (10.00 points) and A07 (9.54 points) intervals contain the true 10.38 points</dd></div>
+      </dl>
     </div>
 
     <div class="p-block">
