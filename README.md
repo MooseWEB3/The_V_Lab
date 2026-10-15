@@ -18,13 +18,13 @@ The home page of The V Lab: open learning guides, synthetic-data projects and R 
 
 This site is a portal. Course pages stay in their own repositories and are linked from here:
 
-- [Statistics_Study](https://github.com/LaboratoireV/Statistics_Study) — biostatistics (14 guides)
-- [Epidemiology_Study](https://github.com/LaboratoireV/Epidemiology_Study) — epidemiology (3 guides)
-- [Data_Visulization](https://github.com/LaboratoireV/Data_Visulization) — ggplot2 and Plotly
-- [RMarkdown_Skills](https://github.com/LaboratoireV/RMarkdown_Skills) — R Markdown
-- [SNOWFLAKE_Skills](https://github.com/LaboratoireV/SNOWFLAKE_Skills) and [ArcGIS_Study](https://github.com/LaboratoireV/ArcGIS_Study) — linked to the repositories until GitHub Pages is enabled there
-- [Project001_HealthData](https://github.com/LaboratoireV/Project001_HealthData) and [HealthcareData_Knowledge](https://github.com/LaboratoireV/HealthcareData_Knowledge) — projects
-- [VLabR](https://github.com/LaboratoireV/VLabR) and [Python_Lab](https://github.com/LaboratoireV/Python_Lab) — tools
+- [Statistics_Study](https://github.com/The-V-Lab/Statistics_Study) — biostatistics (14 guides)
+- [Epidemiology_Study](https://github.com/The-V-Lab/Epidemiology_Study) — epidemiology (3 guides)
+- [Data_Visulization](https://github.com/The-V-Lab/Data_Visulization) — ggplot2 and Plotly
+- [RMarkdown_Skills](https://github.com/The-V-Lab/RMarkdown_Skills) — R Markdown
+- [SNOWFLAKE_Skills](https://github.com/The-V-Lab/SNOWFLAKE_Skills) and [ArcGIS_Study](https://github.com/The-V-Lab/ArcGIS_Study) — linked to the repositories until GitHub Pages is enabled there
+- [Project001_HealthData](https://github.com/The-V-Lab/Project001_HealthData) and [HealthcareData_Knowledge](https://github.com/The-V-Lab/HealthcareData_Knowledge) — projects
+- [VLabR](https://github.com/The-V-Lab/VLabR) and [Python_Lab](https://github.com/The-V-Lab/Python_Lab) — tools
 
 ## Publishing
 
