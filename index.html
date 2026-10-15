@@ -97,10 +97,10 @@
         <div class="chain">
           <div class="step"><b>24,926</b><span>adult ED visits</span></div>
           <div class="step"><b>8,170</b><span>main diagnosis asthma</span></div>
-          <div class="step"><a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><b>7,700</b><span>matched pairs within hospital</span></div>
+          <div class="step"><a class="memo" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a><b>7,700</b><span>matched pairs within hospital</span></div>
         </div>
       </div>
-      <figcaption id="flow-cap">Cohort flow for synthetic data release 2.0 (9 October 2026). Numbers come from memos A01–A07.</figcaption>
+      <figcaption id="flow-cap">Cohort flow for synthetic data release 2.0 (9 October 2026). Counts come from memos A01 and A03–A06.</figcaption>
     </figure>
   </div>
 </div>
@@ -131,16 +131,16 @@
           <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A03.html">A03</a><span>Does time in the ED and triage level relate to admission?<em>Logistic regression</em></span></li>
           <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A04.html">A04</a><span>Link admitted ED visits to inpatient stays<em>Deterministic record linkage, 6-hour window</em></span></li>
           <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A05.html">A05</a><span>How do ED stay and acuity relate to inpatient length of stay?<em>Linear regression, acute-stay sensitivity</em></span></li>
-          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a><span>Summary of A00–A05 on release 2.0<em>Findings memo</em></span></li>
         </ol>
       </div>
       <div class="phase">
         <h3>Adult asthma</h3>
-        <p>Causal and multilevel methods, with hospital clustering.</p>
+        <p>Matching, outcome regression, and regional models. A09 summarizes the whole project.</p>
         <ol class="memos">
-          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><span>Admission risk for asthma vs. similar patients at the same hospital<em>Propensity-score matching, clustered RD/RR</em></span></li>
-          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><span>Adjusted admission risk, risk difference and risk ratio on the matched pairs<em>Outcome regression, g-computation</em></span></li>
-          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a><span>Do asthma admissions, and the asthma effect, differ across Calgary, Edmonton and other regions?<em>Logistic GLMM, hospital random intercepts</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A06.html">A06</a><span>Admission risk for asthma vs. similar patients at the same hospital<em>Within-hospital propensity-score matching</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A07.html">A07</a><span>Standardized admission risk on A06's fixed pairs<em>Outcome regression, hospital fixed effects</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A08.html">A08</a><span>Do asthma admissions, and the asthma gap, differ across Calgary, Edmonton and other regions?<em>Logistic GLMM, hospital random intercepts</em></span></li>
+          <li><a class="id" href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">A09</a><span>Design, methods and results across A00–A08<em>Project summary</em></span></li>
         </ol>
       </div>
     </div>
@@ -187,7 +187,7 @@
 <section>
   <div class="wrap">
     <div class="section-head"><div><h2>Recently updated</h2></div></div>
-    <ul class="activity"><li><a href="https://laboratoirev.github.io/Project001_HealthData/">Project 001: ED-to-Inpatient Pathways</a><span class="what">Release 2.0: one shared synthetic NACRS and DAD release; memos A00–A09 with asthma propensity matching and hospital GLMMs</span><time datetime="2026-10-09">2026-10-09</time></li><li><a href="https://github.com/LaboratoireV/VLabR">VLabR</a><span class="what">R package for data cleaning, summary tables and de-identification</span><time datetime="2026-09-26">2026-09-26</time></li><li><a href="https://github.com/LaboratoireV/Python_Lab">Python Lab</a><span class="what">Beginner Python exercises</span><time datetime="2026-09-18">2026-09-18</time></li><li><a href="https://github.com/LaboratoireV/ArcGIS_Study">Getting started with ArcGIS</a><span class="what">New GIS course</span><time datetime="2026-09-09">2026-09-09</time></li><li><a href="https://laboratoirev.github.io/Statistics_Study/">Biostatistics guides</a><span class="what">14 in-depth statistics guides</span><time datetime="2026-08-12">2026-08-12</time></li></ul>
+    <ul class="activity"><li><a href="https://laboratoirev.github.io/Project001_HealthData/">Project 001: ED-to-Inpatient Pathways</a><span class="what">Memos realigned: A06 matches adult asthma visits, A07 standardizes those pairs, A08 compares regions, and A09 summarizes A00–A08</span><time datetime="2026-10-14">2026-10-14</time></li><li><a href="https://github.com/LaboratoireV/VLabR">VLabR</a><span class="what">R package for data cleaning, summary tables and de-identification</span><time datetime="2026-09-26">2026-09-26</time></li><li><a href="https://github.com/LaboratoireV/Python_Lab">Python Lab</a><span class="what">Beginner Python exercises</span><time datetime="2026-09-18">2026-09-18</time></li><li><a href="https://github.com/LaboratoireV/ArcGIS_Study">Getting started with ArcGIS</a><span class="what">New GIS course</span><time datetime="2026-09-09">2026-09-09</time></li><li><a href="https://laboratoirev.github.io/Statistics_Study/">Biostatistics guides</a><span class="what">14 in-depth statistics guides</span><time datetime="2026-08-12">2026-08-12</time></li></ul>
   </div>
 </section>
 
