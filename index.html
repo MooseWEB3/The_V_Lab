@@ -43,9 +43,10 @@
   <div class="wrap">
     <div>
       <p class="lead-kicker"><a href="projects.html#project-001">Project 001: ED-to-Inpatient Pathways</a></p>
-      <h1>Who gets admitted from the emergency department, and how long do they stay?</h1>
+      <h1>Who is admitted from the emergency department, how long do they stay, and what changes with asthma?</h1>
       <p class="lead-title">From Emergency Department to Inpatient Care: Admission, Length of Stay and Asthma-Related Risk in Simulated Alberta Administrative Data.</p>
-      <p class="lede">An end-to-end health data science project on one shared synthetic dataset of Alberta-style emergency (NACRS) and inpatient (DAD) records. It follows patients from the emergency department into hospital, asks what is linked to admission and length of stay, then builds a fairer comparison for adults with asthma using propensity-score matching and mixed models. Because the data are simulated, it also checks whether those methods recover the effects built into the data.</p>
+      <p class="lede">An end-to-end health data science project on one shared synthetic dataset: 30,000 Alberta-style emergency visits (NACRS) and 60,000 inpatient abstracts (DAD) across 30 hospitals.</p>
+      <p class="lede lede-more">Ten memos take it from raw extract to answers. They ask what is linked to admission, link admitted visits to their inpatient stays to ask what is linked to length of stay, then build a fair comparison for adults with asthma, by hospital and by region, using propensity-score matching, outcome regression and mixed models. Because the true effects are built into the data, the project also checks whether those methods recover them.</p>
       <div class="actions">
         <a class="btn btn-primary" href="projects.html#project-001">Read the project overview</a>
         <a class="btn btn-outline" href="#memos">See the ten memos</a>
@@ -104,6 +105,25 @@
     </figure>
   </div>
 </div>
+
+<section id="findings">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Four questions, four answers</h2>
+        <p>Headline results from the project summary, Memo A09. Every figure comes from simulated data.</p>
+      </div>
+      <a class="more" href="projects.html#project-001">Full project overview</a>
+    </div>
+    <div class="grid grid-4 findings">
+      <div class="card"><p class="q-kicker">Q1 · Admission · A03</p><h3>Triage level drives admission</h3><p>The adjusted odds of admission fall at every CTAS level, to an odds ratio of 0.056 at CTAS 5 versus CTAS 1. Time before the disposition decision adds little: OR 1.024 per 60 minutes (95% CI 1.003 to 1.045).</p></div>
+      <div class="card"><p class="q-kicker">Q2 · Stay in hospital · A04–A05</p><h3>ED time does not predict inpatient stay</h3><p>4,633 of 5,810 admitted visits (79.7%) link to an inpatient stay. Once CTAS is included, ED stay is unrelated to inpatient stay (−0.011 days per 60 minutes, 95% CI −0.056 to 0.034). Stays after a CTAS 5 visit are 2.78 days shorter than after CTAS 1.</p></div>
+      <div class="card"><p class="q-kicker">Q3 · Asthma · A06–A07</p><h3>Asthma adds about 10 points of admission risk</h3><p>Across 7,700 within-hospital matched pairs, admission is 31.8% versus 21.8%: +10.00 points (95% CI 7.59 to 12.41). Outcome regression on the same pairs gives +9.54 points (8.47 to 10.61). The value built into the simulation is 10.38.</p></div>
+      <div class="card"><p class="q-kicker">Q4 · Regions · A08</p><h3>The asthma gap differs by region</h3><p>With a common patient mix, Edmonton-region hospitals admit adult asthma visits more often than Other (+7.23 points, 95% CI 2.16 to 12.99); Calgary's −5.72 points is not established. The asthma gap differs by region (χ² = 78.0 on 2 df, p &lt; 0.001).</p></div>
+    </div>
+    <p class="findings-note"><b>Do the methods work?</b> Across repeated simulations with a known truth, the asthma estimators are biased by at most 0.61 points, 95% intervals cover the truth 92%–98% of the time, and false-positive rates are 3%–4% when there is no effect. <a href="https://laboratoirev.github.io/Project001_HealthData/Project_001_Memo_A09.html">Read the A09 summary</a></p>
+  </div>
+</section>
 
 <section id="memos">
   <div class="wrap">
