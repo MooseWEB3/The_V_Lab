@@ -521,3 +521,5 @@ a.ds-chip:hover { text-decoration: underline; }
 .findings-note a { font-weight: 700; white-space: nowrap; }
 @media (max-width: 1100px) { .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .grid-4 { grid-template-columns: 1fr; } }
+
+.refs-section .atlas-feature { margin-bottom: 18px; }
