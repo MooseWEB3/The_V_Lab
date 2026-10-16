@@ -1,6 +1,6 @@
 # The V Lab
 
-The home page of The V Lab: open learning guides, synthetic-data projects and R tooling for health data science.
+The home page of The V Lab: open learning guides, data analysis projects and R tooling, with a focus on large datasets and healthcare administrative data.
 
 **Live site:** https://vthelab.com/
 
