@@ -10,7 +10,8 @@ The home page of The V Lab: open learning guides, synthetic-data projects and R 
 |---|---|
 | `index.html` | Lab overview, learning tracks, featured project, recent updates |
 | `learn.html` | Searchable catalog of all 22 English guides across five tracks |
-| `projects.html` | Project 001 (synthetic NACRS & DAD) and the Alberta Health Data Atlas |
+| `projects.html` | Project 001 (synthetic NACRS & DAD), Project 002 (Calgary housing dashboard) and the Alberta Health Data Atlas |
+| `project002.html` | Project 002: Calgary Housing Observatory |
 | `tools.html` | VLabR R package and Python Lab |
 | `about.html` | How the lab works, track hubs, contact |
 

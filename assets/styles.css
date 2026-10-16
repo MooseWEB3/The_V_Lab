@@ -538,3 +538,7 @@ a.ds-chip:hover { text-decoration: underline; }
   .chain-below > .excl::before { display: none; }
   .chain-below > .excl { order: 1; } .chain-below > .step:last-child { order: 2; } .chain-below > .step:first-child { order: 3; }
 }
+
+.feature.feature-solo { grid-template-columns: 1fr; }
+.feature.feature-solo p { max-width: 78ch; }
+.card > .tag { align-self: flex-start; }

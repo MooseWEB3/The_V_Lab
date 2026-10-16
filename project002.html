@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project 002: Calgary Housing Observatory | The V Lab</title>
+<meta name="description" content="Project 002: Calgary Housing Observatory. An interactive R Shiny dashboard of 21,328 Calgary residential listings, summarized by community on official City of Calgary boundaries.">
+<link rel="canonical" href="https://vthelab.com/project002.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Project 002: Calgary Housing Observatory | The V Lab">
+<meta property="og:description" content="An interactive Shiny dashboard of Calgary residential listings by community: prices, structure mix and spatial patterns on City of Calgary community boundaries.">
+<meta property="og:url" content="https://vthelab.com/project002.html">
+<meta property="og:image" content="https://vthelab.com/assets/og.png">
+<meta property="og:site_name" content="The V Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Project 002: Calgary Housing Observatory | The V Lab">
+<meta name="twitter:description" content="An interactive Shiny dashboard of Calgary residential listings by community: prices, structure mix and spatial patterns on City of Calgary community boundaries.">
+<meta name="twitter:image" content="https://vthelab.com/assets/og.png">
+<meta name="theme-color" content="#13293d">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="vlab-brand" href="index.html" aria-label="The V Lab home">
+      <span class="vlab-mark" aria-hidden="true">V</span>
+      <span class="vlab-name">The V Lab</span>
+    </a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="projects.html" aria-current="page">Projects</a><a href="learn.html">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="hero compact">
+  <div class="wrap">
+    <p class="eyebrow">Project 002: Calgary Housing Observatory</p>
+    <h1>What does Calgary's housing market look like, community by community?</h1>
+    <p class="lede">An interactive R Shiny dashboard on 21,328 Calgary residential listings, mapped onto the City of Calgary's official community boundaries. Filter by price, age, structure and bedrooms, and the map, charts and community table all update together.</p>
+    <div class="hero-actions" style="margin-top:22px">
+      <a class="btn btn-primary" href="https://housingdataproject.onrender.com/" target="_blank" rel="noopener">Open the live dashboard</a>
+      <a class="btn btn-outline" href="projects.html#project-002">All projects</a>
+    </div>
+    <p class="fine" style="margin-top:14px">The dashboard runs on Render's free tier. If nobody has opened it for a while, the first load can take about a minute.</p>
+    <nav class="toc" aria-label="On this page"><a href="#data">The data</a><a href="#dashboard">The dashboard</a><a href="#build">How it's built</a><a href="#privacy">Community level by design</a></nav>
+  </div>
+</div>
+
+<section id="data">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>One listings extract, official geography</h2>
+        <p>Project 001 asked health-services questions of simulated hospital records. Project 002 asks a question about place: how prices, home types and the pace of sales differ across Calgary's communities.</p>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <span class="tag teal">Listings</span>
+        <h3>The extract</h3>
+        <p>21,328 Calgary residential listings with price, living area, bedrooms, bathrooms, year built, days on market, structure type and community. The listing's community is its MLS subdivision name.</p>
+      </div>
+      <div class="card">
+        <span class="tag teal">Boundaries</span>
+        <h3>The map</h3>
+        <p>Polygons are the City of Calgary Community District Boundaries from the city's open data portal. Subdivision names are matched to official community names, with a 99.9% match rate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>What the dashboard shows</h2>
+        <p>Filters in the sidebar (price, year built, city sector, structure type, bedrooms and community) apply to every view at once.</p>
+      </div>
+    </div>
+    <dl class="sources">
+      <div><dt>Overview</dt><dd>Headline figures for the current selection (listings, median price, median price per square foot, median days on market), a community map of median price, the price distribution, the structure mix, median price by city sector, and price against living area.</dd></div>
+      <div><dt>Map explorer</dt><dd>A community choropleth of median price, median price per square foot or listing count, a density heatmap, and community bubbles sized by listing count, over street, satellite or topographic basemaps, with a measure tool for distances and areas. Click a community to see its medians and its mix of houses, apartments and multi-family homes.</dd></div>
+      <div><dt>Communities</dt><dd>A sortable, filterable table of every community with listings: count, median price, price per square foot, living area, year built and days on market.</dd></div>
+      <div><dt>Notes</dt><dd>Where the data and boundaries come from, and how to read the map.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>How it's built</h2>
+        <p>A small, complete pipeline: clean once, then let a front end read the same files.</p>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3>Prepare</h3><p>An R script parses prices and areas, groups structure types, matches subdivisions to official communities with sf, and writes compact processed files with community-level summaries.</p></div>
+      <div class="card"><h3>Explore</h3><p>A Shiny app built with bslib, leaflet and leaflet.extras, plotly and DT. Every chart, map layer and table is driven by the same filtered data.</p></div>
+      <div class="card"><h3>Deploy</h3><p>A Docker image based on rocker/shiny, deployed as a Render web service. The static vthelab.com site links to it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Community level by design</h2>
+        <p>The source is an MLS extract, so the public dashboard only shows patterns at the community level.</p>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>No owner names, phone numbers, street addresses or MLS numbers are loaded into the app.</li>
+      <li>No parcel-level tax or assessment values, and no listing-level table or download.</li>
+      <li>The density heatmap places each listing at a jittered point around its community's centre, not at its parcel.</li>
+    </ul>
+    <p class="note" style="margin-top:18px">Educational use only. Listing figures describe one extract at one point in time and are not an official market report or a valuation of any property.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="vlab-brand" href="index.html" aria-label="The V Lab home"><span class="vlab-mark" aria-hidden="true">V</span><span class="vlab-name">The V Lab</span></a>
+      <p style="margin:12px 0 0;max-width:46ch">A health data science notebook: projects on synthetic Alberta health data, open guides and R tooling. Educational use only; no patient-level data.</p>
+    </div>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="projects.html" aria-current="page">Projects</a><a href="learn.html">Learn</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="https://github.com/The-V-Lab">GitHub</a></nav>
+  </div>
+</footer>
+</body>
+</html>
