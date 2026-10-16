@@ -162,13 +162,103 @@
       <div>
         <span class="tag teal">Project 002: Calgary Housing Observatory</span>
         <h3>Calgary Housing by Community: Prices, Structure Mix and Spatial Patterns in a Residential Listings Extract</h3>
-        <p>An interactive R Shiny dashboard on 21,328 Calgary residential listings, mapped onto the City of Calgary's official community boundaries. Filter by price, year built, sector, structure type and bedrooms; the community map, charts and community table update together.</p>
-        <p>The public version is community level by design: no owner names, addresses or MLS numbers, and no listing-level table.</p>
+        <p>Project 002 turns one extract of Calgary residential listings into an interactive map of the city's housing market. Each listing is matched to its official City of Calgary community, so price, home type, age and how quickly homes sell can be compared community by community and sector by sector.</p>
+        <p>Where Project 001 is a modelling project on simulated health records, Project 002 is a descriptive, spatial one on a real market extract. Its craft is in the data work: cleaning a raw listings file, joining it to official geography, and building an R Shiny dashboard on top that is safe to publish.</p>
         <div class="hero-actions" style="margin-top:22px">
           <a class="btn btn-primary" href="https://housingdataproject.onrender.com/" target="_blank" rel="noopener">Open the live dashboard</a>
           <a class="btn btn-outline" href="project002.html">About the project</a>
         </div>
       </div>
+    </div>
+
+    <div class="p-block">
+      <h2>One extract, one map</h2>
+      <ol class="pathway" aria-label="Project 002 data flow">
+        <li><b>Listings extract</b><span>Price, living area, bedrooms, year built, days on market, structure type, subdivision</span></li>
+        <li><b>Official communities</b><span>Subdivision names matched to City of Calgary community boundaries</span></li>
+        <li><b>Dashboard</b><span>Filters, community maps, charts and a community table</span></li>
+      </ol>
+      <dl class="sources">
+        <div><dt>Listings</dt><dd>One record per residential listing, from an MLS extract. <b>21,328 listings</b>, of which <b>21,279</b> are priced at $100,000 or more with a known year built and appear in the dashboard's full view.</dd></div>
+        <div><dt>Boundaries</dt><dd>The City of Calgary Community District Boundaries from the city's open data portal. Listings are matched by community name, with a 99.9% match rate. <b>220 communities</b> have listings.</dd></div>
+      </dl>
+      <p class="p-note">Prices here are list prices in one extract, not sale prices or assessed values. Every figure on this page is a median, so a handful of very expensive or very cheap homes cannot pull it far.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>Four questions about place</h2>
+      <div class="table-scroll">
+        <table class="fn-table q-table">
+          <thead><tr><th scope="col">Question</th><th scope="col">Why it matters</th><th scope="col">How the dashboard answers it</th></tr></thead>
+          <tbody>
+            <tr><td>How much do prices differ across Calgary's communities and city sectors?</td><td>A citywide median hides a very wide spread between neighbourhoods</td><td>Community choropleth of median price, median price by sector</td></tr>
+            <tr><td>How does the mix of home types shape a community's prices?</td><td>A community of apartments and one of detached houses are not comparable on price alone</td><td>Structure mix chart, price per square foot, structure breakdown for any clicked community</td></tr>
+            <tr><td>Where do homes sell fastest and slowest?</td><td>Days on market is a simple signal of how much demand meets the supply in an area</td><td>Median days on market by community, in the map and the community table</td></tr>
+            <tr><td>How do new suburbs compare with established neighbourhoods?</td><td>Calgary is growing at its edges while inner-city areas redevelop</td><td>Median year built per community, filters on year built</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="p-block">
+      <h2>What the extract shows</h2>
+      <div class="grid grid-3">
+        <div class="card"><h3>Citywide</h3><p>Across 21,279 listings, the median list price is <b>$575,000</b>, or <b>$393 per square foot</b>, and the median listing has been on the market for <b>28 days</b>.</p></div>
+        <div class="card"><h3>By home type</h3><p>Houses are just over half the listings (11,219), at a median of $696,000 and 24 days on market. Multi-family homes sit at $485,000, and apartments at $295,000 with the slowest pace, 39 days.</p></div>
+        <div class="card"><h3>By sector</h3><p>The West sector has the highest median price ($743,000) and the East the lowest ($440,000). The Centre has the most listings (4,086), led by the Beltline, the single busiest community with 606.</p></div>
+      </div>
+      <p class="p-note" style="margin-top:16px">Bedrooms track price closely: a median of $249,000 for one bedroom, $355,000 for two, $568,000 for three, $710,000 for four and $780,000 for five or more.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>Community by community</h2>
+      <div class="two-col">
+        <div class="prose">
+          <p>The spread between communities is far larger than the spread between sectors. Among the 157 communities with at least 50 listings, the median list price runs from about $272,000 in Lincoln Park to $2.26 million in Elbow Park, more than eight times as much.</p>
+          <p>Price per square foot separates location from size. Elbow Park, Lakeview and North Glenmore Park, all established areas close to the Glenmore Reservoir and the Elbow River, top the list at $699 to $859 per square foot. The inner-city apartment markets of the Beltline and the Downtown East Village have low median prices but mid-range or high prices per square foot, because their homes are small.</p>
+          <p>The fastest communities are established, higher-priced ones, where the median listing has been on the market for 11 to 15 days: Elbow Park, Parkland, Sundance, Oakridge and Lakeview.</p>
+        </div>
+        <div>
+          <div class="table-scroll">
+            <table class="fn-table result-table">
+              <caption>Communities with at least 50 listings, median list price</caption>
+              <tbody>
+                <tr><th scope="row">Elbow Park<br><span>Centre · 55 listings</span></th><td>$2,260,500<br><span>$859/sf · 11 days</span></td></tr>
+                <tr><th scope="row">Altadore<br><span>Centre · 184 listings</span></th><td>$1,182,450<br><span>$576/sf · 18 days</span></td></tr>
+                <tr><th scope="row">Aspen Woods<br><span>West · 170 listings</span></th><td>$1,019,950<br><span>$451/sf · 26 days</span></td></tr>
+                <tr><th scope="row">Beltline<br><span>Centre · 606 listings</span></th><td>$315,000<br><span>$405/sf · 38 days</span></td></tr>
+                <tr><th scope="row">Lower Mount Royal<br><span>Centre · 63 listings</span></th><td>$279,000<br><span>$366/sf · 28 days</span></td></tr>
+                <tr><th scope="row">Lincoln Park<br><span>West · 54 listings</span></th><td>$272,250<br><span>$347/sf · 27 days</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-block">
+      <h2>New suburbs and established neighbourhoods</h2>
+      <div class="grid grid-2">
+        <div class="card"><h3>Built in the last few years</h3><p>In Rangeview, Hotchkiss, Pine Creek, Belvedere and Alpine Park the median home was built in 2025. They list at $326 to $368 per square foot and have the longest median times on market, 46 to 56 days. Some of that is likely new-build stock listed before completion, which this extract cannot separate out.</p></div>
+        <div class="card"><h3>Built around 1960</h3><p>In Westgate, Fairview, Kingsland, Forest Lawn and Brentwood the median home dates from 1959 to 1964. Apart from Forest Lawn, they list at $505 to $607 per square foot, well above the new suburbs, mainly because of where they are rather than what was built.</p></div>
+      </div>
+      <p class="p-note" style="margin-top:16px">These are descriptive contrasts between community medians, not a price model. Location, lot size, condition and home type all move together, and the dashboard shows them side by side rather than separating their effects.</p>
+    </div>
+
+    <div class="p-block">
+      <h2>How it's built</h2>
+      <dl class="ds-facts four checks">
+        <div><dt>Prepare</dt><dd>An R script parses prices and areas, groups structure types and matches subdivisions to official communities with sf</dd></div>
+        <div><dt>Summarize</dt><dd>Community medians are recomputed from the filtered listings every time a filter changes</dd></div>
+        <div><dt>Explore</dt><dd>Shiny with bslib, leaflet and leaflet.extras, plotly and DT, all reading the same filtered data</dd></div>
+        <div><dt>Deploy</dt><dd>A Docker image based on rocker/shiny, running as a Render web service</dd></div>
+      </dl>
+    </div>
+
+    <div class="p-block">
+      <h2>Community level by design</h2>
+      <p class="prose">The source is an MLS extract, so the public dashboard shows patterns, not properties. Owner names, phone numbers, street addresses, MLS numbers and parcel-level tax and assessment values are never loaded, there is no listing-level table or download, and the density heatmap places each listing at a jittered point around its community's centre rather than at its parcel.</p>
+      <p class="note" style="margin-top:14px">Educational use only. These figures describe one extract at one point in time. They are not an official market report and not a valuation of any property.</p>
     </div>
   </div>
 </section>
